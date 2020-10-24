@@ -32,137 +32,296 @@ public class AnalizadorSintactico
     void emparejar(){};
 
     void prog(){
-        if(token.equals("function") || token.equals("var"))
+        if(token.equals("function") || token.equals("var")){
             prog_fn();
+            main_prog();
+        }
         else
             errorSintaxis("function", "var");
     }
 
     void prog_fn(){
-        if(token.equals("function"))
-
-        else if(token.equals("var"))
-            pass
+        if(token.equals("function")){
+            fn_decl_list();
+            prog_fn();
+        }
+        else if(token.equals("var")){
+            //lambda
+        }
         else
             errorSintaxis("function", "var");
     }
 
     void main_prog(){
-        if(token.equals("var"))
+        if(token.equals("var")){
+            emparejar("end");
+            var_decl();
+            emparejar("tk_puntoycoma");
+            main_stmt();
+            emparejar("end");
+        }
         else
             errorSintaxis("function", "var");
     }
 
-
     void main_stmt(){
-        if(token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") || token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") || token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") || token.equals("end") || token.equals("next") || token.equals("break") || token.equals("id") || token.equals("tk_decremento") || token.equals("tk_incremento"))
-
-        else if(token.equals("end"))
-
+        if(token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
+                token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
+                token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
+                token.equals("end") || token.equals("next") || token.equals("break") || token.equals("id") ||
+                token.equals("tk_decremento") || token.equals("tk_incremento")){
+            stmt();
+            main_stmt();
+        }
+        else if(token.equals("end")){
+            //lambda
+        }
         else
-            errorSintaxis("print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do", "repeat", "for", "end", "next", "break", "id", "tk_decremento", "tk_incremento", "end");
+            errorSintaxis("print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
+                    "repeat", "for", "end", "next", "break", "id", "tk_decremento", "tk_incremento", "end");
     }
 
     void stmt(){
-        if(token.equals("print"))
-
-        else if(token.equals("input"))
-
-        else if(token.equals("when"))
-
-        else if(token.equals("if"))
-
-        else if(token.equals("unless"))
-
-        else if(token.equals("while"))
-
-        else if(token.equals("return"))
-
-        else if(token.equals("until"))
-
-        else if(token.equals("loop"))
-
-        else if(token.equals("do"))
-
-        else if(token.equals("repeat"))
-
-        else if(token.equals("for"))
-
-        else if(token.equals("end"))
-
-        else if(token.equals("next"))
-
-        else if(token.equals("break"))
-
-        else if(token.equals("id"))
-
-        else if(token.equals("tk_incremento"))
-
-        else if(token.equals("tk_decremento"))
-
+        if(token.equals("print")){
+            emparejar("print");
+        }
+        else if(token.equals("input")){
+            emparejar("input");
+            emparejar("id");
+        }
+        else if(token.equals("when")){
+            emparejar("when");
+            lexpr();
+            emparejar("tk_par_izq");
+            lexpr();
+            emparejar("tk_par_der");
+            emparejar("do");
+            stmt_block();
+        }
+        else if(token.equals("if")){
+            emparejar("if");
+            emparejar("tk_par_izq");
+            lexpr();
+            emparejar("tk_par_der");
+            emparejar("do");
+            stmt_block();
+            emparejar("else");
+            stmt_block();
+        }
+        else if(token.equals("unless")){
+            emparejar("unless");
+            emparejar("tk_par_izq");
+            lexpr();
+            emparejar("tk_par_der");
+            emparejar("do");
+            stmt_block();
+        }
+        else if(token.equals("while")){
+            emparejar("while");
+            emparejar("tk_par_izq");
+            lexpr();
+            emparejar("tk_par_der");
+            emparejar("do");
+            stmt_block();
+        }
+        else if(token.equals("return")){
+            emparejar("return");
+            lexpr();
+        }
+        else if(token.equals("until")){
+            emparejar("until");
+            emparejar("tk_par_izq");
+            lexpr();
+            emparejar("tk_par_der");
+            emparejar("do");
+            stmt_block();
+        }
+        else if(token.equals("loop")){
+            emparejar("loop");
+            stmt_block();
+        }
+        else if(token.equals("do")){
+            emparejar("tk_do");
+            stmt_block();
+            DO_sig();
+        }
+        else if(token.equals("repeat")){
+            emparejar("repeat");
+            emparejar("tk_num");
+            emparejar("tk_dospuntos");
+            stmt_block();
+        }
+        else if(token.equals("for")){
+            emparejar("for");
+            emparejar("tk_par_izq");
+            lexpr();
+            emparejar("tk_puntoycoma");
+            lexpr();
+            emparejar("tk_puntoycoma");
+            lexpr();
+            emparejar("tk_puntoycoma");
+            emparejar("tk_par_der");
+            emparejar("tk_do");
+            stmt_block();
+        }
+        else if(token.equals("end")){
+            emparejar("end");
+            emparejar("tk_puntoycoma");
+        }
+        else if(token.equals("next")){
+            emparejar("next");
+            emparejar("tk_puntoycoma");
+        }
+        else if(token.equals("break")){
+            emparejar("break");
+            emparejar("tk_puntoycoma");
+        }
+        else if(token.equals("id")){
+            emparejar("id");
+            signo();
+        }
+        else if(token.equals("tk_incremento")){
+            emparejar("tk_incremento");
+            emparejar("id");
+            emparejar("tk_puntoycoma");
+        }
+        else if(token.equals("tk_decremento")){
+            emparejar("tk_decremento");
+            emparejar("id");
+            emparejar("tk_puntoycoma");
+        }
         else
             errorSintaxis("input", "when", "if", "unless", "while", "return", "until", "loop", "do", "repeat", "for", "end", "next", "break", "id", "tk_decremento", "tk_incremento");
-
     }
 
     void DO_sig(){
-        if(token.equals("while"))
-
-        else if(token.equals("until"))
-
+        if(token.equals("while")){
+            emparejar("while");
+            emparejar("tk_par_izq");
+            lexpr();
+            emparejar("tk_par_der");
+        }
+        else if(token.equals("until")){
+            emparejar("until");
+            emparejar("tk_par_izq");
+            lexpr();
+            emparejar("tk_par_der");
+        }
     }
 
     void signo(){
-:=
-        if(token() == )
-+=
-
--=
-
-
-*=
-
-/=
-
-%=
-        ++
-                --
-
+        if(token().equals("tk_asignacion")){
+            emparejar("tk_asignacion");
+            lexpr();
+            emparejar("tk_puntoycoma");
+        }
+        else if(token.equals("tk_sum_asig")){
+            emparejar("tk_sum_asig");
+            lexpr();
+            emparejar("tk_puntoycoma");
+        }
+        else if(token.equals("tk_res_asig")){
+            emparejar("tk_res_asig");
+            lexpr();
+            emparejar("tk_puntoycoma");
+        }
+        else if(token.equals("tk_mul_asig")){
+            emparejar("tk_mul_asig");
+            lexpr();
+            emparejar("tk_puntoycoma");
+        }
+        else if(token.equals("tk_div_asig")){
+            emparejar("tk_div_asig");
+            lexpr();
+            emparejar("tk_puntoycoma");
+        }
+        else if(token.equals("tk_mod_asig")){
+            emparejar("tk_mod_asig");
+            lexpr();
+            emparejar("tk_puntoycoma");
+        }
+        else if(token.equals("tk_incremento")){
+            emparejar("tk_incremento");
+            emparejar("tk_puntoycoma");
+        }
+        else if(token.equals("tk_decremento")){
+            emparejar("tk_decremento");
+            emparejar("tk_puntoycoma");
+        }
     }
 
     void fn_decl_list(){
-        TK_FUNCTION
-        if(token() == )
+        if(token.equals("function")){
+            emparejar("function");
+            emparejar("fid");
+            emparejar("tk_dospuntos");
+            emparejar("datatype");????
+            emparejar("tk_par_izq");
+            var_decl();
+            emparejar("tk_par_der");
+            emparejar("var");
+            var_decl();
+            emparejar("tk_puntoycoma");
+            stmt_block();
+        }
     }
 
     void var_decl(){
-        ID
-        if(token() == )
+        if(token.equals("id")){
+            emparejar("id");
+            emparejar("tk_dospuntos");
+            emparejar("datatype");????
+            cont_data();
+        }
     }
 
     void cont_data(){
-,
-        if(token() == )
-
-            ; )
+        if(token.equals("tk_coma")){
+            emparejar("tk_coma");
+            emparejar("id");
+            emparejar("datatype");????
+            cont_data();
+        }
+        else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der")){
+            //lambda
+        }
     }
 
     void stmt_block(){
-        TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_END TK_NEXT TK_BREAK ID -- ++
-                //{
-        if(token() == )
+        if(token.equals("tk_cor_izq")){
+            emparejar("tk_cor_izq");
+            stmt();
+            stmt_mas();
+            emparejar("tk_cor_der");
+        }
+        else if(token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
+                token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
+                token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
+                token.equals("end") || token.equals("next") || token.equals("break") || token.equals("id") ||
+                token.equals("tk_decremento") || token.equals("tk_incremento")){
+            stmt();
+        }
     }
 
     void stmt_mas(){
-        TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_END TK_NEXT TK_BREAK ID -- ++
-        if(token() == )
-
+        if(token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
+                token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
+                token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
+                token.equals("end") || token.equals("next") || token.equals("break") || token.equals("id") ||
+                token.equals("tk_decremento") || token.equals("tk_incremento")){
+            stmt();
+            stmt_mas();
+        }
+        else if(token.equals("tk_cor_der")){
+            emparejar("tk_cor_der");
+        }
     }
-    //}
 
-    void lexpr(){
-        TK_NOT TK_NUM TK_BOOL ID ++ -- ( FID
-        if(token() == )
+    void lexpr() {
+        if (token.equals("not") || token.equals("num") || token.equals("bool") || token.equals("id") || token.equals("tk_incremento") || token.equals("tk_decremento") || token.equals("tk_par_izq") || token.equals("fid")) {
+            nexpr();
+            nexprComilla();
+        }
     }
 
     public void lexpr_and(){
