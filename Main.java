@@ -557,8 +557,11 @@ public class Main {
             else
                 respuesta += "'" + esperados[i] + "'";
         }
-        System.out.println("<" + "linea" + ":" + "col" + "> Error sintactico: se encontro:" +"lexema del token encontrado" +
-                ";" + "se esperaba: " + respuesta);
+        String lexema = tokens.get(0).lexema;
+        if(lexema == null)
+            lexema = tokens.get(0).tipo;
+        System.out.println("<" + tokens.get(0).fila + ":" + tokens.get(0).columna + "> Error sintactico: se encontro: " + lexema +
+                "; se esperaba: " + respuesta + ".");
     }
 
     static void emparejar(String s) {
