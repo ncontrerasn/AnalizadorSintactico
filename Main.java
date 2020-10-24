@@ -58,7 +58,6 @@ public class Main {
 
     public static void main(String[] args) {
         analizadorLexico();
-        token = tokens.get(0).tipo;
         prog();
         //for (int i = 0; i < tokens.size(); i++)
             //System.out.println(tokens.get(i).tipo);
