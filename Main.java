@@ -592,9 +592,9 @@ public class Main {
 
     static void main_prog() {
         token = tokens.get(0).tipo;
-        String[] esperados = {"function", "var"};
+        String[] esperados = {"var"};
         if (token.equals("var")) {
-            emparejar("end");
+            emparejar("var");
             var_decl();
             emparejar("tk_puntoycoma");
             main_stmt();
@@ -607,11 +607,11 @@ public class Main {
     static void main_stmt() {
         token = tokens.get(0).tipo;
         String[] esperados = {"print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
-                "repeat", "for", "end", "next", "break", "id", "tk_decremento", "tk_incremento", "end"};
+                "repeat", "for", "next", "break", "id", "tk_decremento", "tk_incremento", "end"};
         if (token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
                 token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
                 token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
-                token.equals("end") || token.equals("next") || token.equals("break") || token.equals("id") ||
+                token.equals("next") || token.equals("break") || token.equals("id") ||
                 token.equals("tk_decremento") || token.equals("tk_incremento")) {
             stmt();
             main_stmt();
@@ -625,18 +625,20 @@ public class Main {
 
     static void stmt() {
         token = tokens.get(0).tipo;
-        String[] esperados = {"input", "when", "if", "unless", "while", "return", "until", "loop", "do", "repeat", "for",
-                "end", "next", "break", "id", "tk_decremento", "tk_incremento"};
+        String[] esperados = {"print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do", "repeat", "for",
+                "next", "break", "id", "tk_decremento", "tk_incremento"};
         if (token.equals("print")) {
             emparejar("print");
+            lexpr();
+            emparejar("tk_puntoycoma");
         }
         else if (token.equals("input")) {
             emparejar("input");
             emparejar("id");
+            emparejar("tk_puntoycoma");
         }
         else if (token.equals("when")) {
             emparejar("when");
-            lexpr();
             emparejar("tk_par_izq");
             lexpr();
             emparejar("tk_par_der");
@@ -672,6 +674,7 @@ public class Main {
         else if (token.equals("return")) {
             emparejar("return");
             lexpr();
+            emparejar("tk_puntoycoma");
         }
         else if (token.equals("until")) {
             emparejar("until");
@@ -704,14 +707,9 @@ public class Main {
             lexpr();
             emparejar("tk_puntoycoma");
             lexpr();
-            emparejar("tk_puntoycoma");
             emparejar("tk_par_der");
-            emparejar("tk_do");
+            emparejar("do");
             stmt_block();
-        }
-        else if (token.equals("end")) {
-            emparejar("end");
-            emparejar("tk_puntoycoma");
         }
         else if (token.equals("next")) {
             emparejar("next");
@@ -725,13 +723,13 @@ public class Main {
             emparejar("id");
             signo();
         }
-        else if (token.equals("tk_incremento")) {
-            emparejar("tk_incremento");
+        else if (token.equals("tk_decremento")) {
+            emparejar("tk_decremento");
             emparejar("id");
             emparejar("tk_puntoycoma");
         }
-        else if (token.equals("tk_decremento")) {
-            emparejar("tk_decremento");
+        else if (token.equals("tk_incremento")) {
+            emparejar("tk_incremento");
             emparejar("id");
             emparejar("tk_puntoycoma");
         }
@@ -741,7 +739,7 @@ public class Main {
 
     static void DO_sig() {
         token = tokens.get(0).tipo;
-        String[] esperados = {};
+        String[] esperados = {"while", "until"};
         if (token.equals("while")) {
             emparejar("while");
             emparejar("tk_par_izq");
@@ -760,6 +758,7 @@ public class Main {
 
     static void signo() {
         token = tokens.get(0).tipo;
+        String[] esperados = {"tk_asignacion", "tk_sum_asig", "tk_res_asig", "tk_mul_asig", "tk_div_asig", "tk_mod_asig"};
         if (token.equals("tk_asignacion")) {
             emparejar("tk_asignacion");
             lexpr();
@@ -804,6 +803,7 @@ public class Main {
 
     static void fn_decl_list() {
         token = tokens.get(0).tipo;
+        String[] esperados = {"function"};
         if (token.equals("function")) {
             emparejar("function");
             emparejar("fid");
@@ -823,6 +823,7 @@ public class Main {
 
     static void var_decl() {
         token = tokens.get(0).tipo;
+        String[] esperados = {"id"};
         if (token.equals("id")) {
             emparejar("id");
             emparejar("tk_dospuntos");
@@ -835,9 +836,11 @@ public class Main {
 
     static void cont_data() {
         token = tokens.get(0).tipo;
+        String[] esperados = {"tk_coma", "tk_puntoycoma", "tk_par_der"};
         if (token.equals("tk_coma")) {
             emparejar("tk_coma");
             emparejar("id");
+            emparejar("tk_dospuntos");
             emparejar("datatype");????
             cont_data();
         }
@@ -850,6 +853,8 @@ public class Main {
 
     static void stmt_block() {
         token = tokens.get(0).tipo;
+        String[] esperados = {"print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
+                "repeat", "for", "next", "break", "id", "tk_decremento", "tk_incremento"};
         if (token.equals("tk_cor_izq")) {
             emparejar("tk_cor_izq");
             stmt();
@@ -869,6 +874,8 @@ public class Main {
 
     static void stmt_mas() {
         token = tokens.get(0).tipo;
+        String[] esperados = {"print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
+                "repeat", "for", "next", "break", "id", "tk_decremento", "tk_incremento"};
         if (token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
                 token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
                 token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
@@ -878,7 +885,7 @@ public class Main {
             stmt_mas();
         }
         else if (token.equals("tk_cor_der")) {
-            emparejar("tk_cor_der");
+            //lambda
         }
         else
             errorSintaxis(esperados);
@@ -886,11 +893,13 @@ public class Main {
 
     static void lexpr() {
         token = tokens.get(0).tipo;
-        if (token.equals("not") || token.equals("num") || token.equals("bool") || token.equals("id") ||
+        String[] esperados = {"not", "tk_num", "bool", "id", "tk_incremento", "tk_decremento", "tk_par_izq",
+                "fid"};
+        if (token.equals("not") || token.equals("tk_num") || token.equals("bool") || token.equals("id") ||
                 token.equals("tk_incremento") || token.equals("tk_decremento") || token.equals("tk_par_izq") ||
                 token.equals("fid")) {
             nexpr();
-            nexprComilla();
+            nexpr_prima();
         }
         else
             errorSintaxis(esperados);
