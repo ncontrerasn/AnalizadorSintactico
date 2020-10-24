@@ -81,4 +81,6 @@ f2: , lexpr f2
 f2: lambda
 DATATYPE: num
 DATATYPE: bool
+TK_BOOL: true
+TK_BOOL: false
 end
