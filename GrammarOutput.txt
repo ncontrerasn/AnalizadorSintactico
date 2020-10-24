@@ -1,0 +1,226 @@
+NTs: [prog, prog_fn, main_prog, main_stmt, stmt, DO_sig, signo, fn_decl_list, var_decl, cont_data, stmt_block, stmt_mas, lexpr, nexpr", lexpr_and, lexpr_or, nexpr, rexpr, sig, simple_expr, t2, term, fa, factor, s, f2]
+expresions:[lambda, VAR, ;, TK_END, TK_PRINT, TK_INPUT, ID, TK_WHEN, (, ), TK_DO, TK_IF, TK_ELSE, TK_UNLESS, TK_WHILE, TK_RETURN, TK_UNTIL, TK_LOOP, TK_REPEAT, TK_NUM, :, TK_FOR, TK_NEXT, TK_BREAK, --, ++, :=, +=, -=, *=, /=, %=, TK_FUNCTION, FID, DATATYPE, ,, {, }, TK_AND, TK_OR, TK_NOT, <, ==, <=, >, >=, !=, +, -, *, /, %, TK_BOOL]
+TradNT0: prog , A
+TradNT1: prog_fn , B
+TradNT2: main_prog , C
+TradNT3: main_stmt , D
+TradNT4: stmt , E
+TradNT5: DO_sig , F
+TradNT6: signo , G
+TradNT7: fn_decl_list , H
+TradNT8: var_decl , I
+TradNT9: cont_data , J
+TradNT10: stmt_block , K
+TradNT11: stmt_mas , L
+TradNT12: lexpr , M
+TradNT13: nexpr" , N
+TradNT14: lexpr_and , O
+TradNT15: lexpr_or , P
+TradNT16: nexpr , Q
+TradNT17: rexpr , R
+TradNT18: sig , S
+TradNT19: simple_expr , T
+TradNT20: t2 , U
+TradNT21: term , V
+TradNT22: fa , W
+TradNT23: factor , X
+TradNT24: s , Y
+TradNT25: f2 , Z
+TradT0: lambda , 9
+TradT1: VAR , a
+TradT2: ; , ;
+TradT3: TK_END , b
+TradT4: TK_PRINT , c
+TradT5: TK_INPUT , d
+TradT6: ID , e
+TradT7: TK_WHEN , f
+TradT8: ( , (
+TradT9: ) , )
+TradT10: TK_DO , g
+TradT11: TK_IF , h
+TradT12: TK_ELSE , i
+TradT13: TK_UNLESS , j
+TradT14: TK_WHILE , k
+TradT15: TK_RETURN , l
+TradT16: TK_UNTIL , m
+TradT17: TK_LOOP , n
+TradT18: TK_REPEAT , o
+TradT19: TK_NUM , p
+TradT20: : , :
+TradT21: TK_FOR , q
+TradT22: TK_NEXT , r
+TradT23: TK_BREAK , s
+TradT24: -- , t
+TradT25: ++ , u
+TradT26: := , v
+TradT27: += , w
+TradT28: -= , x
+TradT29: *= , y
+TradT30: /= , z
+TradT31: %= , 0
+TradT32: TK_FUNCTION , 1
+TradT33: FID , 2
+TradT34: DATATYPE , 3
+TradT35: , , ,
+TradT36: { , {
+TradT37: } , }
+TradT38: TK_AND , &
+TradT39: TK_OR , |
+TradT40: TK_NOT , !
+TradT41: < , <
+TradT42: == , 4
+TradT43: <= , 5
+TradT44: > , >
+TradT45: >= , 6
+TradT46: != , 7
+TradT47: + , +
+TradT48: - , -
+TradT49: * , *
+TradT50: / , /
+TradT51: % , %
+TradT52: TK_BOOL , 8
+NTs: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z]
+expresions:[9, a, ;, b, c, d, e, f, (, ), g, h, i, j, k, l, m, n, o, p, :, q, r, s, t, u, v, w, x, y, z, 0, 1, 2, 3, ,, {, }, &, |, !, <, 4, 5, >, 6, 7, +, -, *, /, %, 8]
+grammar: [A: BC, B: HB, B: 9, C: aI;Db, D: ED, D: 9, E: cM;, E: de;, E: f(M)gK, E: h(M)gKiK, E: j(M)gK, E: k(M)gK, E: lM;, E: m(M)gK, E: nK, E: gKF, E: op:K, E: q(M;M;M)gK, E: b;, E: r;, E: s;, E: eG, E: te;, E: ue;, F: k(M), F: m(M), G: vM;, G: wM;, G: xM;, G: yM;, G: zM;, G: 0M;, G: u;, G: t;, H: 12:3(I)aI;K, I: e:3J, J: ,e:3J, J: 9, K: {EL}, K: E, L: EL, L: 9, M: QN, N: P, N: O, O: &QO, O: 9, P: |QP, P: 9, Q: !(M), Q: R, R: TS, S: <T, S: 4T, S: 5T, S: >T, S: 6T, S: 7T, T: VU, U: +VU, U: -VU, U: 9, V: XW, W: *XW, W: /XW, W: %XW, W: 9, X: p, X: 8, X: eY, X: ue, X: te, X: (M), X: 2(MZ), Y: u, Y: t, Y: 9, Z: ,MZ, Z: 9]
+//////////////////////
+/////////////////////
+/////////////////////
+First Set
+/////////////////////
+prog		-> TK_FUNCTION VAR 
+prog_fn		-> TK_FUNCTION lambda 
+main_prog	-> VAR 
+main_stmt	-> TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_END TK_NEXT TK_BREAK ID -- ++ lambda 
+stmt		-> TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_END TK_NEXT TK_BREAK ID -- ++ 
+DO_sig		-> TK_WHILE TK_UNTIL 
+signo		-> := += -= *= /= %= ++ -- 
+fn_decl_list	-> TK_FUNCTION 
+var_decl	-> ID 
+cont_data	-> , lambda 
+stmt_block	-> { TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_END TK_NEXT TK_BREAK ID -- ++ 
+stmt_mas	-> TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_END TK_NEXT TK_BREAK ID -- ++ lambda 
+lexpr		-> TK_NOT TK_NUM TK_BOOL ID ++ -- ( FID 
+nexpr"		-> TK_OR lambda TK_AND 
+lexpr_and	-> TK_AND lambda 
+lexpr_or	-> TK_OR lambda 
+nexpr		-> TK_NOT TK_NUM TK_BOOL ID ++ -- ( FID 
+rexpr		-> TK_NUM TK_BOOL ID ++ -- ( FID 
+sig		-> < == <= > >= != 
+simple_expr	-> TK_NUM TK_BOOL ID ++ -- ( FID 
+t2		-> + - lambda 
+term		-> TK_NUM TK_BOOL ID ++ -- ( FID 
+fa		-> * / % lambda 
+factor		-> TK_NUM TK_BOOL ID ++ -- ( FID 
+s		-> ++ -- lambda 
+f2		-> , lambda 
+/////////////////////
+Follow Set
+/////////////////////
+prog		-> $ 
+prog_fn		-> VAR 
+main_prog	-> $ 
+main_stmt	-> TK_END 
+stmt		-> TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_END TK_NEXT TK_BREAK ID -- ++ } TK_ELSE TK_FUNCTION VAR 
+DO_sig		-> TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_END TK_NEXT TK_BREAK ID -- ++ } TK_ELSE TK_FUNCTION VAR 
+signo		-> TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_END TK_NEXT TK_BREAK ID -- ++ } TK_ELSE TK_FUNCTION VAR 
+fn_decl_list	-> TK_FUNCTION VAR 
+var_decl	-> ; ) 
+cont_data	-> ; ) 
+stmt_block	-> TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_END TK_NEXT TK_BREAK ID -- ++ } TK_ELSE TK_FUNCTION VAR 
+stmt_mas	-> } 
+lexpr		-> ; ) , 
+nexpr"		-> ; ) , 
+lexpr_and	-> ; ) , 
+lexpr_or	-> ; ) , 
+nexpr		-> TK_OR ; ) , TK_AND 
+rexpr		-> TK_OR ; ) , TK_AND 
+sig		-> TK_OR ; ) , TK_AND 
+simple_expr	-> < == <= > >= != TK_OR ; ) , TK_AND 
+t2		-> < == <= > >= != TK_OR ; ) , TK_AND 
+term		-> + - < == <= > >= != TK_OR ; ) , TK_AND 
+fa		-> + - < == <= > >= != TK_OR ; ) , TK_AND 
+factor		-> * / % + - < == <= > >= != TK_OR ; ) , TK_AND 
+s		-> * / % + - < == <= > >= != TK_OR ; ) , TK_AND 
+f2		-> ) 
+/////////////////////
+Predictions
+/////////////////////
+A: BC		{ TK_FUNCTION VAR }
+B: HB		{ TK_FUNCTION }
+B: 9		{ VAR }
+C: aI;Db	{ VAR }
+D: ED		{ TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_END TK_NEXT TK_BREAK ID -- ++ }
+D: 9		{ TK_END }
+E: cM;		{ TK_PRINT }
+E: de;		{ TK_INPUT }
+E: f(M)gK	{ TK_WHEN }
+E: h(M)gKiK	{ TK_IF }
+E: j(M)gK	{ TK_UNLESS }
+E: k(M)gK	{ TK_WHILE }
+E: lM;		{ TK_RETURN }
+E: m(M)gK	{ TK_UNTIL }
+E: nK		{ TK_LOOP }
+E: gKF		{ TK_DO }
+E: op:K		{ TK_REPEAT }
+E: q(M;M;M)gK	{ TK_FOR }
+E: b;		{ TK_END }
+E: r;		{ TK_NEXT }
+E: s;		{ TK_BREAK }
+E: eG		{ ID }
+E: te;		{ -- }
+E: ue;		{ ++ }
+F: k(M)		{ TK_WHILE }
+F: m(M)		{ TK_UNTIL }
+G: vM;		{ := }
+G: wM;		{ += }
+G: xM;		{ -= }
+G: yM;		{ *= }
+G: zM;		{ /= }
+G: 0M;		{ %= }
+G: u;		{ ++ }
+G: t;		{ -- }
+H: 12:3(I)aI;K	{ TK_FUNCTION }
+I: e:3J		{ ID }
+J: ,e:3J	{ , }
+J: 9		{ ; ) }
+K: {EL}		{ { }
+K: E		{ TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_END TK_NEXT TK_BREAK ID -- ++ }
+L: EL		{ TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_END TK_NEXT TK_BREAK ID -- ++ }
+L: 9		{ } }
+M: QN		{ TK_NOT TK_NUM TK_BOOL ID ++ -- ( FID }
+N: P		{ TK_OR }
+N: O		{ TK_AND }
+O: &QO		{ TK_AND }
+O: 9		{ ; ) , }
+P: |QP		{ TK_OR }
+P: 9		{ ; ) , }
+Q: !(M)		{ TK_NOT }
+Q: R		{ TK_NUM TK_BOOL ID ++ -- ( FID }
+R: TS		{ TK_NUM TK_BOOL ID ++ -- ( FID }
+S: <T		{ < }
+S: 4T		{ == }
+S: 5T		{ <= }
+S: >T		{ > }
+S: 6T		{ >= }
+S: 7T		{ != }
+T: VU		{ TK_NUM TK_BOOL ID ++ -- ( FID }
+U: +VU		{ + }
+U: -VU		{ - }
+U: 9		{ < == <= > >= != TK_OR ; ) , TK_AND }
+V: XW		{ TK_NUM TK_BOOL ID ++ -- ( FID }
+W: *XW		{ * }
+W: /XW		{ / }
+W: %XW		{ % }
+W: 9		{ + - < == <= > >= != TK_OR ; ) , TK_AND }
+X: p		{ TK_NUM }
+X: 8		{ TK_BOOL }
+X: eY		{ ID }
+X: ue		{ ++ }
+X: te		{ -- }
+X: (M)		{ ( }
+X: 2(MZ)	{ FID }
+Y: u		{ ++ }
+Y: t		{ -- }
+Y: 9		{ * / % + - < == <= > >= != TK_OR ; ) , TK_AND }
+Z: ,MZ		{ , }
+Z: 9		{ ) }

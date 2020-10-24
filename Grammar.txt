@@ -1,0 +1,80 @@
+prog: prog_fn main_prog
+prog_fn: fn_decl_list prog_fn
+prog_fn: lambda
+main_prog: VAR var_decl ; main_stmt TK_END
+main_stmt: stmt main_stmt
+main_stmt: lambda
+stmt: TK_PRINT lexpr ;
+stmt: TK_INPUT ID ;
+stmt: TK_WHEN ( lexpr ) TK_DO stmt_block
+stmt: TK_IF ( lexpr ) TK_DO stmt_block TK_ELSE stmt_block
+stmt: TK_UNLESS ( lexpr ) TK_DO stmt_block
+stmt: TK_WHILE ( lexpr ) TK_DO stmt_block
+stmt: TK_RETURN lexpr ;
+stmt: TK_UNTIL ( lexpr ) TK_DO stmt_block
+stmt: TK_LOOP stmt_block
+stmt: TK_DO stmt_block DO_sig
+stmt: TK_REPEAT TK_NUM : stmt_block
+stmt: TK_FOR ( lexpr ; lexpr ; lexpr ) TK_DO stmt_block
+stmt: TK_END ;
+stmt: TK_NEXT ;
+stmt: TK_BREAK ;
+stmt: ID signo
+stmt: -- ID ;
+stmt: ++ ID ;
+DO_sig: TK_WHILE ( lexpr )
+DO_sig: TK_UNTIL ( lexpr )
+signo: := lexpr ;
+signo: += lexpr ;
+signo: -= lexpr ;
+signo: *= lexpr ;
+signo: /= lexpr ;
+signo: %= lexpr ;
+signo: ++ ;
+signo: -- ;
+fn_decl_list: TK_FUNCTION FID : DATATYPE ( var_decl ) VAR var_decl ; stmt_block
+var_decl: ID : DATATYPE cont_data
+cont_data: , ID : DATATYPE cont_data
+cont_data: lambda
+stmt_block: { stmt stmt_mas }
+stmt_block: stmt
+stmt_mas: stmt stmt_mas
+stmt_mas: lambda
+lexpr: nexpr nexpr"
+nexpr": lexpr_or
+nexpr": lexpr_and
+lexpr_and: TK_AND nexpr lexpr_and
+lexpr_and: lambda
+lexpr_or: TK_OR nexpr lexpr_or
+lexpr_or: lambda
+nexpr: TK_NOT ( lexpr )
+nexpr: rexpr
+rexpr: simple_expr sig
+sig: < simple_expr
+sig: == simple_expr
+sig: <= simple_expr
+sig: > simple_expr
+sig: >= simple_expr
+sig: != simple_expr
+simple_expr: term t2
+t2: + term t2
+t2: - term t2
+t2: lambda
+term: factor fa
+fa: * factor fa
+fa: / factor fa
+fa: % factor fa
+fa: lambda
+factor: TK_NUM
+factor: TK_BOOL
+factor: ID s
+factor: ++ ID
+factor: -- ID
+factor: ( lexpr )
+factor: FID ( lexpr f2 )
+s: ++
+s: --
+s: lambda
+f2: , lexpr f2
+f2: lambda
+end
