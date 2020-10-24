@@ -177,21 +177,21 @@ public class AnalizadorSintactico
         else errorSintaxis(and, tk_par_der, tk_coma);
     }
 
-public void nexprComilla(){
-      if(token.equals(or))
+  public void nexprComilla(){
+      if(token.equals("or"))
         
         {
         lexpr_or();
         
       }
-     else if(token.equals(and)){
+     else if(token.equals("and")){
       
         
         lexpr_and();
         
       }
      
-      else errorStintaxis(or,and);
+      else errorStintaxis("or","and");
     
     
     
@@ -199,23 +199,23 @@ public void nexprComilla(){
   }  
   
    public void lexpr_and(){
-      if(token.equals(and))
+      if(token.equals("and"))
         
         {
-        emparejar(and);
+        emparejar("and");
         nexpr();
         lexpr_and();
       
         
       }
-     else if(token.equals(tk_puntoycoma) || token.equals(tk_par_der) || token.equals(tk_coma)){
+     else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma")){
       
         
         
         
       }
      
-      else errorStintaxis(and, tk_par_der, tk_coma);
+      else errorStintaxis("and", "tk_par_der", "tk_coma");
     
     
     
@@ -224,23 +224,23 @@ public void nexprComilla(){
   
   
   public void lexpr_or(){
-      if(token.equals(or))
+      if(token.equals("or"))
         
         {
-        emparejar(or);
+        emparejar("or");
         nexpr();
         lexpr_or();
       
         
       }
-     else if(token.equals(tk_puntoycoma) || token.equals(tk_par_der) || token.equals(tk_coma)){
+     else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma")){
       
         
         
         
       }
      
-      else errorStintaxis(or, tk_par_der, tk_coma);
+      else errorStintaxis("or", "tk_par_der", "tk_coma");
     
     
     
@@ -248,7 +248,7 @@ public void nexprComilla(){
   }  
   
    public void nexpr(){
-      if(token.equals(num) || token.equals(bool) || token.equals(id)   || token.equals(tk_incremento) || token.equals(tk_decremento)  || token.equals(tk_par_izq) || token.equals(fid) )
+      if(token.equals("num") || token.equals("bool") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
         
         {
         
@@ -256,21 +256,310 @@ public void nexprComilla(){
       
         
       }
-     else if(token.equals(not)){
-        emparejar(not);
-        emparejar(tk_par_izq);
+     else if(token.equals("not")){
+        emparejar("not");
+        emparejar("tk_par_izq");
        lexpr();
-       emparejar(tk_par_der);
+       emparejar("tk_par_der");
         
         
         
       }
      
-      else errorStintaxis(num, bool ,id, tk_incremento, tk_decremento,tk_par_izq, fid,not);
+      else errorStintaxis("num", "bool" ,"id", "tk_incremento", "tk_decremento","tk_par_izq", "fid,not");
     
     
     
     
+  }  
+   public void rexpr(){
+      if(token.equals("num") || token.equals("bool") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
+        
+        {
+        
+     simple_expr();
+      sig();
+        
+      }
+     
+      else errorStintaxis("num", "bool" ,"id", "tk_incremento", "tk_decremento","tk_par_izq", "fid");
+    
+    
+    
+    
+  }  
+    public void sig(){
+      if(token.equals("tk_menor") )
+        
+        {
+        emparejar("tk_menor");
+        simple_expr();
+        
+       
+      }
+      
+      else if(token.equals("tk_igualdad")){
+        emparejar("tk_igualdad");
+        simple_expr();
+        
+        
+        
+      }
+       else if(token.equals("tk_menor_igual")){
+        emparejar("tk_menor_igual");
+        simple_expr();
+        
+        
+        
+      }
+      else if(token.equals("tk_mayor")){
+        emparejar("tk_mayor");
+        simple_expr();
+        
+        
+        
+      }
+      else if(token.equals("tk_mayor_igual")){
+        emparejar("tk_mayor_igual");
+        simple_expr();
+        
+        
+        
+      }
+      else if(token.equals("tk_diferente")){
+        emparejar("tk_diferente");
+        simple_expr();
+        
+        
+        
+      }
+     
+      
+     
+     
+      else errorStintaxis("tk_menor", "tk_igualdad", "tk_menor_igual", "tk_mayor","tk_mayor_igual","tk_diferente");
+    
+    
+    
+    
+  }  
+  
+  
+  public void simple_expr(){
+      if(token.equals("num") || token.equals("bool") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
+        
+        {
+        
+        term();
+        t2();
+      
+        
+      }
+     
+      else errorStintaxis("num", "bool" ,"id", "tk_incremento", "tk_decremento","tk_par_izq", "fid");
+    
+    
+    
+    
+  }  
+  
+  
+  public void t2(){
+      if(token.equals("tk_mas") )
+        
+        {
+        emparejar("tk_mas");
+        term();
+        t2();
+       
+      }
+      
+      else if(token.equals("tk_menos")){
+        emparejar("tk_menos");
+        term();
+        t2();
+        
+        
+        
+      }
+     
+      
+     
+     else if(  token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
+        || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or") 
+        || token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma") ||    token.equals("and")   
+            )
+        
+        {
+        
+        
+      }
+      else errorStintaxis("tk_mas","tk_menos","tk_menor","tk_igualdad","tk_menor_igual","tk_mayor","tk_mayor_igual","diferente","or","tk_puntoycoma","tk_par_der","tk_coma","and");
+    
+    
+    
+    
+  }  
+  
+  
+  public void term(){
+      if(token.equals("num") || token.equals("bool") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
+        
+        {
+        
+        factor();
+        fa();
+      
+        
+      }
+     
+      else errorStintaxis("num", "bool" ,"id", "tk_incremento", "tk_decremento","tk_par_izq", "fid");
+    
+    
+    
+    
+  }  
+   public void fa(){
+      if(token.equals("tk_mul") )
+        
+        {
+        emparejar("tk_mul");
+        factor();
+        fa();
+        
+      }
+      
+      else if(token.equals("tk_div")){
+         emparejar("tk_div");
+        factor();
+        fa();
+        
+        
+        
+        
+      }
+     
+      else if(token.equals("tk_mod")){
+         emparejar("tk_mod");
+        factor();
+        fa();
+        
+      }
+     
+     else if( token.equals("tk_mas") || token.equals("tk_menos") || token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
+        || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or") 
+        || token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma") ||    token.equals("and")   
+            )
+        
+        {
+        
+        
+      }
+      else errorStintaxis("tk_mul","tk_div","tk_mod","tk_mas","tk_menos","tk_menor","tk_igualdad","tk_menor_igual","tk_mayor","tk_mayor_igual","diferente","or","tk_puntoycoma","tk_par_der","tk_coma","and");
+    
+    
+    
+    
+  }  
+  
+   public void factor(){
+      if(token.equals("fid") )
+        
+        {
+        emparejar("fid");
+        emparejar("tk_par_izq");
+        lexpr();
+        f2();
+        emparejar("tk_par_der");
+        
+      }
+      
+      else if(token.equals("tk_par_izq")){
+        emparejar("tk_par_izq");
+        lexpr();
+        emparejar("tk_par_der");
+        
+        
+        
+      }
+     
+      else if(token.equals("tk_decremento")){
+        emparejar("tk_decremento");
+       	 emparejar("id");
+                      
+      }
+     else if(token.equals("tk_incremento")){
+        emparejar("tk_incremento");
+       	 emparejar("id");
+                      
+      }
+     
+      else if(token.equals("id")){
+        emparejar("id");
+       	 s();
+                      
+      }
+      else if(token.equals("bool")){
+        emparejar("bool");
+       	        
+      }
+     else if(token.equals("num")){
+        emparejar("num");
+       	        
+      }
+      else errorStintaxis("fid", "tk_par_izq", "tk_incremento", "id", "bool", "num","tk_decremento");
+    
+    
+    
+    
+  }  
+  
+   public void s(){
+      if(token.equals("tk_mul") || token.equals("tk_div") || token.equals("tk_mod") || token.equals("tk_mas") || token.equals("tk_menos") || token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
+        || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or") || token.equals("tk_puntoycoma") || 
+          token.equals("token_par_der") || token.equals("tk_coma") || token.equals("and") )
+        
+        {
+        
+        
+      }
+      
+      else if(token.equals("tk_decremento")){
+        emparejar("tk_decremento");
+        
+        
+        
+      }
+     else if(token.equals("tk_incremento")){
+        emparejar("tk_incremento");
+        
+        
+        
+      }
+      else errorStintaxis("tk_mul", "tk_div","tk_mod","tk_mas","tk_menos","tk_menor","tk_igualdad","tk_menor_igual","tk_mayor","tk_mayor_igual","diferente","or", "tk_puntoycoma", "tk_pard_der" , "tk_coma", "and","tk_decremento","tk_incremento");
+    
+    
+    
+    
+  }  
+  	
+  public void f2(){
+      if(token == "tk_par_der" ){
+        
+        
+      }
+      
+      else if(token == "tk_coma"){
+        emparejar("tk_coma");
+        lexpr();
+        f2();
+        
+      }
+      else errorStintaxis("tk_par_der","tk_coma");
+      
+      
+    }
+     
   }  
    public void rexpr(){
       if(token.equals(num) || token.equals(bool) || token.equals(id)   || token.equals(tk_incremento) || token.equals(tk_decremento)  || token.equals(tk_par_izq) || token.equals(fid) )
