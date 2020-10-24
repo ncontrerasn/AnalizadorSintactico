@@ -79,4 +79,6 @@ s: --
 s: lambda
 f2: , lexpr f2
 f2: lambda
+DATATYPE: num
+DATATYPE: bool
 end

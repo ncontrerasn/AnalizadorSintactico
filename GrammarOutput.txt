@@ -1,5 +1,5 @@
-NTs: [prog, prog_fn, main_prog, main_stmt, stmt, DO_sig, signo, fn_decl_list, var_decl, cont_data, stmt_block, stmt_mas, lexpr, nexpr_prima, lexpr_and, nexpr_primab, lexpr_or, nexpr_primac, nexpr, rexpr, sig, simple_expr, t2, term, fa, factor, s, f2]
-expresions:[lambda, VAR, ;, TK_END, TK_PRINT, TK_INPUT, ID, TK_WHEN, (, ), TK_DO, TK_IF, TK_ELSE, TK_UNLESS, TK_WHILE, TK_RETURN, TK_UNTIL, TK_LOOP, TK_REPEAT, TK_NUM, :, TK_FOR, TK_NEXT, TK_BREAK, --, ++, :=, +=, -=, *=, /=, %=, TK_FUNCTION, FID, DATATYPE, ,, {, }, TK_AND, TK_OR, TK_NOT, <, ==, <=, >, >=, !=, +, -, *, /, %, TK_BOOL]
+NTs: [prog, prog_fn, main_prog, main_stmt, stmt, DO_sig, signo, fn_decl_list, var_decl, cont_data, stmt_block, stmt_mas, lexpr, nexpr_prima, lexpr_and, nexpr_primab, lexpr_or, nexpr_primac, nexpr, rexpr, sig, simple_expr, t2, term, fa, factor, s, f2, DATATYPE]
+expresions:[lambda, VAR, ;, TK_END, TK_PRINT, TK_INPUT, ID, TK_WHEN, (, ), TK_DO, TK_IF, TK_ELSE, TK_UNLESS, TK_WHILE, TK_RETURN, TK_UNTIL, TK_LOOP, TK_REPEAT, TK_NUM, :, TK_FOR, TK_NEXT, TK_BREAK, --, ++, :=, +=, -=, *=, /=, %=, TK_FUNCTION, FID, ,, {, }, TK_AND, TK_OR, TK_NOT, <, ==, <=, >, >=, !=, +, -, *, /, %, TK_BOOL, num, bool]
 TradNT0: prog , @
 TradNT1: prog_fn , A
 TradNT2: main_prog , B
@@ -28,6 +28,7 @@ TradNT24: fa , X
 TradNT25: factor , Y
 TradNT26: s , Z
 TradNT27: f2 , [
+TradNT28: DATATYPE , ]
 TradT0: lambda , 9
 TradT1: VAR , a
 TradT2: ; , ;
@@ -62,28 +63,29 @@ TradT30: /= , z
 TradT31: %= , 0
 TradT32: TK_FUNCTION , 1
 TradT33: FID , 2
-TradT34: DATATYPE , 3
-TradT35: , , ,
-TradT36: { , {
-TradT37: } , }
-TradT38: TK_AND , &
-TradT39: TK_OR , |
-TradT40: TK_NOT , !
-TradT41: < , <
-TradT42: == , 4
-TradT43: <= , 5
-TradT44: > , >
-TradT45: >= , 6
-TradT46: != , 7
-TradT47: + , +
-TradT48: - , -
-TradT49: * , *
-TradT50: / , /
-TradT51: % , %
-TradT52: TK_BOOL , 8
-NTs: [@, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, []
-expresions:[9, a, ;, b, c, d, e, f, (, ), g, h, i, j, k, l, m, n, o, p, :, q, r, s, t, u, v, w, x, y, z, 0, 1, 2, 3, ,, {, }, &, |, !, <, 4, 5, >, 6, 7, +, -, *, /, %, 8]
-grammar: [@: AB, A: GA, A: 9, B: aH;Cb, C: DC, C: 9, D: cL;, D: de;, D: f(L)gJ, D: h(L)gJiJ, D: j(L)gJ, D: k(L)gJ, D: lL;, D: m(L)gJ, D: nJ, D: gJE, D: op:J, D: q(L;L;L)gJ, D: r;, D: s;, D: eF, D: te;, D: ue;, E: k(L), E: m(L), F: vL;, F: wL;, F: xL;, F: yL;, F: zL;, F: 0L;, F: u;, F: t;, G: 12:3(H)aH;J, H: e:3I, I: ,e:3I, I: 9, J: {DK}, J: D, K: DK, K: 9, L: RM, M: &N, M: |P, M: 9, N: RO, O: &N, O: 9, P: RQ, Q: |P, Q: 9, R: !(L), R: S, S: UT, T: <U, T: 4U, T: 5U, T: >U, T: 6U, T: 7U, U: WV, V: +WV, V: -WV, V: 9, W: YX, X: *YX, X: /YX, X: %YX, X: 9, Y: p, Y: 8, Y: eZ, Y: ue, Y: te, Y: (L), Y: 2(L[), Z: u, Z: t, Z: 9, [: ,L[, [: 9]
+TradT34: , , ,
+TradT35: { , {
+TradT36: } , }
+TradT37: TK_AND , &
+TradT38: TK_OR , |
+TradT39: TK_NOT , !
+TradT40: < , <
+TradT41: == , 3
+TradT42: <= , 4
+TradT43: > , >
+TradT44: >= , 5
+TradT45: != , 6
+TradT46: + , +
+TradT47: - , -
+TradT48: * , *
+TradT49: / , /
+TradT50: % , %
+TradT51: TK_BOOL , 7
+TradT52: num , 8
+TradT53: bool , à
+NTs: [@, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, [, ]]
+expresions:[9, a, ;, b, c, d, e, f, (, ), g, h, i, j, k, l, m, n, o, p, :, q, r, s, t, u, v, w, x, y, z, 0, 1, 2, ,, {, }, &, |, !, <, 3, 4, >, 5, 6, +, -, *, /, %, 7, 8, à]
+grammar: [@: AB, A: GA, A: 9, B: aH;Cb, C: DC, C: 9, D: cL;, D: de;, D: f(L)gJ, D: h(L)gJiJ, D: j(L)gJ, D: k(L)gJ, D: lL;, D: m(L)gJ, D: nJ, D: gJE, D: op:J, D: q(L;L;L)gJ, D: r;, D: s;, D: eF, D: te;, D: ue;, E: k(L), E: m(L), F: vL;, F: wL;, F: xL;, F: yL;, F: zL;, F: 0L;, F: u;, F: t;, G: 12:](H)aH;J, H: e:]I, I: ,e:]I, I: 9, J: {DK}, J: D, K: DK, K: 9, L: RM, M: &N, M: |P, M: 9, N: RO, O: &N, O: 9, P: RQ, Q: |P, Q: 9, R: !(L), R: S, S: UT, T: <U, T: 3U, T: 4U, T: >U, T: 5U, T: 6U, U: WV, V: +WV, V: -WV, V: 9, W: YX, X: *YX, X: /YX, X: %YX, X: 9, Y: p, Y: 7, Y: eZ, Y: ue, Y: te, Y: (L), Y: 2(L[), Z: u, Z: t, Z: 9, [: ,L[, [: 9, ]: 8, ]: à]
 //////////////////////
 /////////////////////
 /////////////////////
@@ -117,6 +119,7 @@ fa		-> * / % lambda
 factor		-> TK_NUM TK_BOOL ID ++ -- ( FID 
 s		-> ++ -- lambda 
 f2		-> , lambda 
+DATATYPE	-> num bool 
 /////////////////////
 Follow Set
 /////////////////////
@@ -148,6 +151,7 @@ fa		-> + - < == <= > >= != TK_AND TK_OR ; ) ,
 factor		-> * / % + - < == <= > >= != TK_AND TK_OR ; ) , 
 s		-> * / % + - < == <= > >= != TK_AND TK_OR ; ) , 
 f2		-> ) 
+DATATYPE	-> ( , ; ) 
 /////////////////////
 Predictions
 /////////////////////
@@ -232,3 +236,5 @@ s : --					{ -- }
 s : lambda					{ * / % + - < == <= > >= != TK_AND TK_OR ; ) , }
 f2 : , lexpr f2					{ , }
 f2 : lambda					{ ) }
+DATATYPE : num					{ num }
+DATATYPE : bool					{ bool }
