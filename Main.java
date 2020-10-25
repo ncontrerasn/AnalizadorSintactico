@@ -926,7 +926,7 @@ static void nexpr_prima(){
         lexpr_and();
         
       }
-	else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") token.equals("tk_coma")){
+	else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma")){
         
         
       }
