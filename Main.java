@@ -60,7 +60,7 @@ public class Main {
         analizadorLexico();
         prog();
         //for (int i = 0; i < tokens.size(); i++)
-            //System.out.println(tokens.get(i).tipo);
+        //System.out.println(tokens.get(i).tipo);
         System.out.println("El analisis sintactico ha finalizado correctamente.");
         System.out.println("Error sintactico: se encontro final de archivo; se esperaba ‘end’.");
 
@@ -201,14 +201,14 @@ public class Main {
                             estado = 9;
                         break;
                     case 8:
-                        newTok = new Token("tk_incremento", y, xToprint);
+                        newTok = new Token("tk_incremento", "++",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         break;
                     case 9:
                         y = y - fixY(numeroActual);
-                        newTok = new Token("tk_mas", y, xToprint);
+                        newTok = new Token("tk_mas", "+",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -216,7 +216,7 @@ public class Main {
                         x = x - fix(numeroActual);
                         break;
                     case 10:
-                        newTok = new Token("tk_sum_asig", y, xToprint);
+                        newTok = new Token("tk_sum_asig", "+=",y, xToprint);
                         tokens.add(newTok);
                         //newTok.PrintTokenWithoutLexema();
                         estado = 1;
@@ -228,7 +228,7 @@ public class Main {
                             estado = 999;
                         break;
                     case 12:
-                        newTok = new Token("tk_igualdad", y, xToprint);
+                        newTok = new Token("tk_igualdad", "==",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -241,7 +241,7 @@ public class Main {
                         break;
                     case 14:
                         y = y - fixY(numeroActual);
-                        newTok = new Token("tk_div", y, xToprint);
+                        newTok = new Token("tk_div", "/",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -249,7 +249,7 @@ public class Main {
                         x = x - fix(numeroActual);
                         break;
                     case 15:
-                        newTok = new Token("tk_div_asig", y, xToprint);
+                        newTok = new Token("tk_div_asig", "/=",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -262,7 +262,7 @@ public class Main {
                         break;
                     case 17:
                         y = y - fixY(numeroActual);
-                        newTok = new Token("tk_mul", y, xToprint);
+                        newTok = new Token("tk_mul", "*",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -270,7 +270,7 @@ public class Main {
                         x = x - fix(numeroActual);
                         break;
                     case 18:
-                        newTok = new Token("tk_mul_asig", y, xToprint);
+                        newTok = new Token("tk_mul_asig", "*=",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -283,7 +283,7 @@ public class Main {
                         break;
                     case 20:
                         y = y - fixY(numeroActual);
-                        newTok = new Token("tk_dospuntos", y, xToprint);
+                        newTok = new Token("tk_dospuntos", ":",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -291,7 +291,7 @@ public class Main {
                         x = x - fix(numeroActual);
                         break;
                     case 21:
-                        newTok = new Token("tk_asignacion", y, xToprint);
+                        newTok = new Token("tk_asignacion", ":=",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -340,7 +340,7 @@ public class Main {
                         x = x - fix(numeroActual);
                         break;
                     case 27:
-                        newTok = new Token("tk_mod_asig", y, xToprint);
+                        newTok = new Token("tk_mod_asig", "%=",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -354,7 +354,7 @@ public class Main {
                         break;
                     case 29:
                         y = y - fixY(numeroActual);
-                        newTok = new Token("tk_mayor", y, xToprint);
+                        newTok = new Token("tk_mayor", ">",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -363,7 +363,7 @@ public class Main {
                         x = x - fix(numeroActual);
                         break;
                     case 30:
-                        newTok = new Token("tk_mayor_igual", y, xToprint);
+                        newTok = new Token("tk_mayor_igual", "<=",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -374,7 +374,7 @@ public class Main {
                             estado = 32;
                         break;
                     case 32:
-                        newTok = new Token("tk_diferente", y, xToprint);
+                        newTok = new Token("tk_diferente", "!=",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -389,7 +389,7 @@ public class Main {
                             estado = 35;
                         break;
                     case 34:
-                        newTok = new Token("tk_decremento", y, xToprint);
+                        newTok = new Token("tk_decremento", "--",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -397,7 +397,7 @@ public class Main {
                         break;
                     case 35:
                         y = y - fixY(numeroActual);
-                        newTok = new Token("tk_menos", lexemaActual, y, xToprint);
+                        newTok = new Token("tk_menos",lexemaActual, y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -406,7 +406,7 @@ public class Main {
                         x = x - fix(numeroActual);
                         break;
                     case 36:
-                        newTok = new Token("tk_res_asig", y, xToprint);
+                        newTok = new Token("tk_res_asig", "-=",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -415,42 +415,42 @@ public class Main {
                     case 37:
                         switch (numeroActual) {
                             case 40:
-                                newTok = new Token("tk_par_izq", y, xToprint);
+                                newTok = new Token("tk_par_izq", "(",y, xToprint);
                                 //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 41:
-                                newTok = new Token("tk_par_der", y, xToprint);
+                                newTok = new Token("tk_par_der", ")",y, xToprint);
                                 //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 91:
-                                newTok = new Token("tk_cor_izq", y, xToprint);
+                                newTok = new Token("tk_cor_izq", "[",y, xToprint);
                                 //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 93:
-                                newTok = new Token("tk_cor_der", y, xToprint);
+                                newTok = new Token("tk_cor_der", "]",y, xToprint);
                                 //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 123:
-                                newTok = new Token("tk_llave_izq", y, xToprint);
+                                newTok = new Token("tk_llave_izq", "{",y, xToprint);
                                 //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 125:
-                                newTok = new Token("tk_llave_der", y, xToprint);
+                                newTok = new Token("tk_llave_der", "}",y, xToprint);
                                 //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 59:
-                                newTok = new Token("tk_puntoycoma", y, xToprint);
+                                newTok = new Token("tk_puntoycoma", ";",y, xToprint);
                                 //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 44:
-                                newTok = new Token("tk_coma", y, xToprint);
+                                newTok = new Token("tk_coma", ",",y, xToprint);
                                 //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
@@ -467,7 +467,7 @@ public class Main {
                         break;
                     case 39:
                         y = y - fixY(numeroActual);
-                        newTok = new Token("tk_menor", y, xToprint);
+                        newTok = new Token("tk_menor", "<",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -476,7 +476,7 @@ public class Main {
                         x = x - fix(numeroActual);
                         break;
                     case 40:
-                        newTok = new Token("tk_menor_igual", y, xToprint);
+                        newTok = new Token("tk_menor_igual", "<=",y, xToprint);
                         //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
@@ -557,11 +557,15 @@ public class Main {
                 respuesta += "'" + esperados[i] + "'";
         }
         String lexema = tokens.get(0).lexema;
-        if(lexema == null)
-            lexema = tokens.get(0).tipo;
+        //System.out.println(lexema);
+        //if(lexema == null){
+          //  lexema = tokens.get(0).tipo;
+        //}
+        //System.out.println(lexema);
+        //System.out.println(lexema.length() == 0);
         System.out.println("<" + tokens.get(0).fila + ":" + tokens.get(0).columna + "> Error sintactico: se encontro: " + lexema +
                 "; se esperaba: " + respuesta + ".");
-	    System.exit(0); 
+        System.exit(0);
     }
 
     static void emparejar(String s) {
@@ -693,7 +697,7 @@ public class Main {
             stmt_block();
         }
         else if (token.equals("do")) {
-            emparejar("tk_do");
+            emparejar("do");
             stmt_block();
             DO_sig();
         }
@@ -762,7 +766,7 @@ public class Main {
 
     static void signo() {
         token = tokens.get(0).tipo;
-        String[] esperados = {":=", "+=", "-=", "*=", "/=", "%="};
+        String[] esperados = {":=", "+=", "-=", "*=", "/=", "%=", "++", "--"};
         if (token.equals("tk_asignacion")) {
             emparejar("tk_asignacion");
             lexpr();
@@ -857,18 +861,18 @@ public class Main {
 
     static void stmt_block() {
         token = tokens.get(0).tipo;
-        String[] esperados = {"print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
+        String[] esperados = {"{", "print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
                 "repeat", "for", "next", "break", "id", "--", "++"};
-        if (token.equals("tk_cor_izq")) {
-            emparejar("tk_cor_izq");
+        if (token.equals("tk_llave_izq")) {
+            emparejar("tk_llave_izq");
             stmt();
             stmt_mas();
-            emparejar("tk_cor_der");
+            emparejar("tk_llave_der");
         }
         else if (token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
                 token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
                 token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
-                token.equals("end") || token.equals("next") || token.equals("break") || token.equals("id") ||
+                token.equals("next") || token.equals("break") || token.equals("id") ||
                 token.equals("tk_decremento") || token.equals("tk_incremento")) {
             stmt();
         }
@@ -879,16 +883,16 @@ public class Main {
     static void stmt_mas() {
         token = tokens.get(0).tipo;
         String[] esperados = {"print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
-                "repeat", "for", "next", "break", "id", "--", "++"};
+                "repeat", "for", "next", "break", "id", "--", "++", "}"};
         if (token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
                 token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
                 token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
-                token.equals("end") || token.equals("next") || token.equals("break") || token.equals("id") ||
+                token.equals("next") || token.equals("break") || token.equals("id") ||
                 token.equals("tk_decremento") || token.equals("tk_incremento")) {
             stmt();
             stmt_mas();
         }
-        else if (token.equals("tk_cor_der")) {
+        else if (token.equals("tk_llave_der")) {
             //lambda
         }
         else
@@ -898,7 +902,7 @@ public class Main {
     static void lexpr() {
         token = tokens.get(0).tipo;
         String[] esperados = {"not", "numero", "true", "false", "id", "++", "--", "(", "fid"};
-        if (token.equals("not") || token.equals("tk_num") || token.equals("bool") || token.equals("id") ||
+        if (token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id") ||
                 token.equals("tk_incremento") || token.equals("tk_decremento") || token.equals("tk_par_izq") ||
                 token.equals("fid")) {
             nexpr();
@@ -908,281 +912,279 @@ public class Main {
             errorSintaxis(esperados);
     }
 
-static void nexpr_prima(){       
+    static void nexpr_prima(){
         token = tokens.get(0).tipo;
-              String[] esperados = {"||","&&", ";",")",","};
-      if(token.equals("or")){
-	emparejar("or");
-        lexpr_or();
-      }
-     else if(token.equals("and")){
-        emparejar("and");
-        lexpr_and();
-      }
-	else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma")){
-      }
-      else errorSintaxis(esperados);
-  }  
+        String[] esperados = {"||","&&", ";",")",","};
+        if(token.equals("or")){
+            emparejar("or");
+            lexpr_or();
+        }
+        else if(token.equals("and")){
+            emparejar("and");
+            lexpr_and();
+        }
+        else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma")){
+        }
+        else errorSintaxis(esperados);
+    }
 
-   static void lexpr_and(){      
-       token = tokens.get(0).tipo;
+    static void lexpr_and(){
+        token = tokens.get(0).tipo;
         String[] esperados = {"!","numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
-      if(token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
-        nexpr();
-        nexpr_primab();
-      }
-      else errorSintaxis(esperados);
-  } 
-	
-static void nexpr_primab(){       
-    token = tokens.get(0).tipo;
-          String[] esperados = {"&&", ";" ,")", ","};
-      if(token.equals("and") ){
-        emparejar("and");
-        lexpr_and();
-      }
-     else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma")){
-        
-      }
-      else errorSintaxis(esperados);
-  }  
-  
-  
-  static void lexpr_or(){      
+        if(token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
+            nexpr();
+            nexpr_primab();
+        }
+        else errorSintaxis(esperados);
+    }
 
-      token = tokens.get(0).tipo;
-            String[] esperados = {"!","numero", "true", "false"  ,"identificador", "++", "--","(", "identificador de funcion"};
-      
-     if(token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
-      nexpr();
-	nexpr_primac();
-      }
-      else errorSintaxis(esperados);
-  }  
-	
-	static void nexpr_primac(){     
+    static void nexpr_primab(){
         token = tokens.get(0).tipo;
-            String[] esperados = {"||", ";" ,")", ","};
-      if(token.equals("or") ){
-        emparejar("or");
-	      lexpr_or();
-      }
-     else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma")){
-      }
-     
-    else errorSintaxis(esperados);
-  }  
-  
-   static void nexpr(){        
+        String[] esperados = {"&&", ";" ,")", ","};
+        if(token.equals("and") ){
+            emparejar("and");
+            lexpr_and();
+        }
+        else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma")){
+
+        }
+        else errorSintaxis(esperados);
+    }
+
+
+    static void lexpr_or(){
+
+        token = tokens.get(0).tipo;
+        String[] esperados = {"!","numero", "true", "false"  ,"identificador", "++", "--","(", "identificador de funcion"};
+
+        if(token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
+            nexpr();
+            nexpr_primac();
+        }
+        else errorSintaxis(esperados);
+    }
+
+    static void nexpr_primac(){
+        token = tokens.get(0).tipo;
+        String[] esperados = {"||", ";" ,")", ","};
+        if(token.equals("or") ){
+            emparejar("or");
+            lexpr_or();
+        }
+        else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma")){
+        }
+
+        else errorSintaxis(esperados);
+    }
+
+    static void nexpr(){
         String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion","!"};
-      if(token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
-        rexpr(); 
-      }
-     else if(token.equals("not")){
-        emparejar("not");
-        emparejar("tk_par_izq");
-       lexpr();
-       emparejar("tk_par_der");
-      }
-      else errorSintaxis(esperados);
-  } 
-	
-   static void rexpr(){    
-       token = tokens.get(0).tipo;
+        if(token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
+            rexpr();
+        }
+        else if(token.equals("not")){
+            emparejar("not");
+            emparejar("tk_par_izq");
+            lexpr();
+            emparejar("tk_par_der");
+        }
+        else errorSintaxis(esperados);
+    }
+
+    static void rexpr(){
+        token = tokens.get(0).tipo;
         String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
-      if(token.equals("tk_num") || token.equals("true") || token.equals("false")  || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
-     simple_expr();
-      sig(); 
-      }
-      else errorSintaxis(esperados);
-  }  
-	
-    static void sig(){        
+        if(token.equals("tk_num") || token.equals("true") || token.equals("false")  || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
+            simple_expr();
+            sig();
+        }
+        else errorSintaxis(esperados);
+    }
+
+    static void sig(){
         token = tokens.get(0).tipo;
         String[] esperados = {"<", "==", "<=", ">",">=","!="};
-      if(token.equals("tk_menor")){
-        emparejar("tk_menor");
-        simple_expr();
-      }
-      else if(token.equals("tk_igualdad")){
-        emparejar("tk_igualdad");
-        simple_expr();
-      }
-       else if(token.equals("tk_menor_igual")){
-        emparejar("tk_menor_igual");
-        simple_expr();
-      }
-      else if(token.equals("tk_mayor")){
-        emparejar("tk_mayor");
-        simple_expr(); 
-      }
-      else if(token.equals("tk_mayor_igual")){
-        emparejar("tk_mayor_igual");
-        simple_expr();
-      }
-      else if(token.equals("tk_diferente")){
-        emparejar("tk_diferente");
-        simple_expr();
-      }
-      else errorSintaxis(esperados);    
-  }  
-  
-  static void simple_expr(){        
-      token = tokens.get(0).tipo;
+        if(token.equals("tk_menor")){
+            emparejar("tk_menor");
+            simple_expr();
+        }
+        else if(token.equals("tk_igualdad")){
+            emparejar("tk_igualdad");
+            simple_expr();
+        }
+        else if(token.equals("tk_menor_igual")){
+            emparejar("tk_menor_igual");
+            simple_expr();
+        }
+        else if(token.equals("tk_mayor")){
+            emparejar("tk_mayor");
+            simple_expr();
+        }
+        else if(token.equals("tk_mayor_igual")){
+            emparejar("tk_mayor_igual");
+            simple_expr();
+        }
+        else if(token.equals("tk_diferente")){
+            emparejar("tk_diferente");
+            simple_expr();
+        }
+        else errorSintaxis(esperados);
+    }
+
+    static void simple_expr(){
+        token = tokens.get(0).tipo;
 
         String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
-      if(token.equals("tk_num") || token.equals("true") || token.equals("false")  || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
-        term();
-        t2();
-      }
-      else errorSintaxis(esperados);
-  }  
-  
-  static void t2(){        
-      token = tokens.get(0).tipo;
-         String[] esperados = {"+","-","<","==","<=",">",">=","!=","||",";",")",",","&&"};
-      if(token.equals("tk_mas")){
-        emparejar("tk_mas");
-        term();
-        t2(); 
-      }
-      else if(token.equals("tk_menos")){
-        emparejar("tk_menos");
-        term();
-        t2(); 
-      }
-     else if(  token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
-        || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or") 
-        || token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma") ||    token.equals("and")){
-      }
-      else errorSintaxis(esperados);
-  }  
-  
-  static void term(){        
-      token = tokens.get(0).tipo;
-      String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
-      if( token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id") || token.equals("tk_incremento") ||
-                token.equals("tk_decremento") || token.equals("tk_par_izq") || token.equals("fid")){
-        factor();
-        fa();
-      }
-      else errorSintaxis(esperados);
-  } 
-	
-   static void fa(){       
-       token = tokens.get(0).tipo;
-       String[] esperados = {"*","/","%","+","-","<","==","<=",">",">=","!=","||",";",")",",","&&"};
-      if(token.equals("tk_mul")){
-        emparejar("tk_mul");
-        factor();
-        fa();
-      }
-      else if(token.equals("tk_div")){
-         emparejar("tk_div");
-        factor();
-        fa();
-      }
-      else if(token.equals("tk_mod")){
-         emparejar("tk_mod");
-        factor();
-        fa();
-      }
-     
-     else if( token.equals("tk_mas") || token.equals("tk_menos") || token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
-        || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or") 
-        || token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma") ||    token.equals("and")){
-      }
-      else errorSintaxis(esperados);
-  }  
-  
-   static void factor(){        
-       token = tokens.get(0).tipo;
-       String[] esperados = {"identificador de funcion", "(", "++", "identificador", "true", "false", "numero","--"};
-      if(token.equals("fid") )
-        {
-        emparejar("fid");
-        emparejar("tk_par_izq");
-        lexpr();
-        f2();
-        emparejar("tk_par_der");
-      }
-      else if(token.equals("tk_par_izq")){
-        emparejar("tk_par_izq");
-        lexpr();
-        emparejar("tk_par_der");
-      }
-      else if(token.equals("tk_decremento")){
-        emparejar("tk_decremento");
-       	 emparejar("id");           
-      }
-     else if(token.equals("tk_incremento")){
-        emparejar("tk_incremento");
-       	 emparejar("id");              
-      }
-      else if(token.equals("id")){
-        emparejar("id");
-       	 s();          
-      }
-	else if(token.equals("true") || token.equals("false")){
-        TK_BOOL();     
-      }
-     else if(token.equals("tk_num")){
-        emparejar("tk_num");    
-      }
-     else errorSintaxis(esperados);
-  }  
-  
-   static void s(){        
-       token = tokens.get(0).tipo;
-       String[] esperados = {"*", "/","%","+","-","<","==","<=",">",">=","!=", "||", ";", ")" , ",", "&&","--","++"};
-      if(token.equals("tk_mul") || token.equals("tk_div") || token.equals("tk_mod") || token.equals("tk_mas") || token.equals("tk_menos") || token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
-        || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or") || token.equals("tk_puntoycoma") || 
-          token.equals("token_par_der") || token.equals("tk_coma") || token.equals("and") ){
-      }
-      else if(token.equals("tk_decremento")){
-        emparejar("tk_decremento");
-      }
-     else if(token.equals("tk_incremento")){
-        emparejar("tk_incremento");
-      }
-      else errorSintaxis(esperados);
-  }  
-  	
-  static void f2(){        
-      token = tokens.get(0).tipo;
-            String[] esperados = {")",","};
-      if(token.equals("tk_par_der") ){
-      }
-      else if(token.equals("tk_coma")){
-        emparejar("tk_coma");
-        lexpr();
-        f2();
-      }
-      else errorSintaxis(esperados);
-    }
-	static void DATATYPE(){        
-      token = tokens.get(0).tipo;
-            String[] esperados = {"num","bool"};
-      if(token.equals("num") ){
-        emparejar("num");
-      }
-      else if(token.equals("bool")){
-        emparejar("bool");
-      }
-      else errorSintaxis(esperados);
+        if(token.equals("tk_num") || token.equals("true") || token.equals("false")  || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
+            term();
+            t2();
+        }
+        else errorSintaxis(esperados);
     }
 
-    static void TK_BOOL(){        
-      token = tokens.get(0).tipo;
-            String[] esperados = {"true","false"};
-      if(token.equals("true" )){
-        emparejar("true"); 
-      }
-      else if(token.equals("false")){
-        emparejar("false");
-      }
-      else errorSintaxis(esperados);
+    static void t2(){
+        token = tokens.get(0).tipo;
+        String[] esperados = {"+","-","<","==","<=",">",">=","!=","||",";",")",",","&&"};
+        if(token.equals("tk_mas")){
+            emparejar("tk_mas");
+            term();
+            t2();
+        }
+        else if(token.equals("tk_menos")){
+            emparejar("tk_menos");
+            term();
+            t2();
+        }
+        else if(  token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
+                || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or")
+                || token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma") ||    token.equals("and")){
+        }
+        else errorSintaxis(esperados);
+    }
+
+    static void term(){
+        token = tokens.get(0).tipo;
+        String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
+        if( token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id") || token.equals("tk_incremento") ||
+                token.equals("tk_decremento") || token.equals("tk_par_izq") || token.equals("fid")){
+            factor();
+            fa();
+        }
+        else errorSintaxis(esperados);
+    }
+
+    static void fa(){
+        token = tokens.get(0).tipo;
+        String[] esperados = {"*","/","%","+","-","<","==","<=",">",">=","!=","||",";",")",",","&&"};
+        if(token.equals("tk_mul")){
+            emparejar("tk_mul");
+            factor();
+            fa();
+        }
+        else if(token.equals("tk_div")){
+            emparejar("tk_div");
+            factor();
+            fa();
+        }
+        else if(token.equals("tk_mod")){
+            emparejar("tk_mod");
+            factor();
+            fa();
+        }
+
+        else if( token.equals("tk_mas") || token.equals("tk_menos") || token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
+                || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or")
+                || token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma") ||    token.equals("and")){
+        }
+        else errorSintaxis(esperados);
+    }
+
+    static void factor(){
+        token = tokens.get(0).tipo;
+        String[] esperados = {"identificador de funcion", "(", "++", "identificador", "true", "false", "numero","--"};
+        if(token.equals("fid") )
+        {
+            emparejar("fid");
+            emparejar("tk_par_izq");
+            lexpr();
+            f2();
+            emparejar("tk_par_der");
+        }
+        else if(token.equals("tk_par_izq")){
+            emparejar("tk_par_izq");
+            lexpr();
+            emparejar("tk_par_der");
+        }
+        else if(token.equals("tk_decremento")){
+            emparejar("tk_decremento");
+            emparejar("id");
+        }
+        else if(token.equals("tk_incremento")){
+            emparejar("tk_incremento");
+            emparejar("id");
+        }
+        else if(token.equals("id")){
+            emparejar("id");
+            s();
+        }
+        else if(token.equals("true") || token.equals("false")){
+            TK_BOOL();
+        }
+        else if(token.equals("tk_num")){
+            emparejar("tk_num");
+        }
+        else errorSintaxis(esperados);
+    }
+
+    static void s(){
+        token = tokens.get(0).tipo;
+        String[] esperados = {"*", "/","%","+","-","<","==","<=",">",">=","!=", "||", ";", ")" , ",", "&&","--","++"};
+        if(token.equals("tk_mul") || token.equals("tk_div") || token.equals("tk_mod") || token.equals("tk_mas") || token.equals("tk_menos") || token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
+                || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or") || token.equals("tk_puntoycoma") ||
+                token.equals("token_par_der") || token.equals("tk_coma") || token.equals("and") ){
+        }
+        else if(token.equals("tk_decremento")){
+            emparejar("tk_decremento");
+        }
+        else if(token.equals("tk_incremento")){
+            emparejar("tk_incremento");
+        }
+        else errorSintaxis(esperados);
+    }
+
+    static void f2(){
+        token = tokens.get(0).tipo;
+        String[] esperados = {")",","};
+        if(token.equals("tk_par_der") ){
+        }
+        else if(token.equals("tk_coma")){
+            emparejar("tk_coma");
+            lexpr();
+            f2();
+        }
+        else errorSintaxis(esperados);
+    }
+    static void DATATYPE(){
+        token = tokens.get(0).tipo;
+        String[] esperados = {"num","bool"};
+        if(token.equals("num") ){
+            emparejar("num");
+        }
+        else if(token.equals("bool")){
+            emparejar("bool");
+        }
+        else errorSintaxis(esperados);
+    }
+
+    static void TK_BOOL(){
+        token = tokens.get(0).tipo;
+        String[] esperados = {"true","false"};
+        if(token.equals("true" )){
+            emparejar("true");
+        }
+        else if(token.equals("false")){
+            emparejar("false");
+        }
+        else errorSintaxis(esperados);
     }
 }
-	
-	
