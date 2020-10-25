@@ -910,7 +910,7 @@ public class Main {
 
 
 
-    static void nexpr_prima(){       
+static void nexpr_prima(){       
         token = tokens.get(0).tipo;
               String[] esperados = {"||","&&", ";",")",","};
       if(token.equals("or"))
@@ -931,7 +931,7 @@ public class Main {
         
       }
      
-      else errorStintaxis(esperados);
+      else errorSintaxis(esperados);
     
     
     
@@ -941,7 +941,7 @@ public class Main {
    static void lexpr_and(){      
        token = tokens.get(0).tipo;
         String[] esperados = {"!","numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
-      if(token.equals("not") token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
+      if(token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
         
         {
         
@@ -952,7 +952,7 @@ public class Main {
       }
      
      
-      else errorStintaxis(esperados);
+      else errorSintaxis(esperados);
     
     
     
@@ -969,12 +969,12 @@ static void nexpr_primab(){
       
         
       }
-     else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") token.equals("tk_coma")){
+     else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma")){
         
         
       }
      
-      else errorStintaxis(esperados);
+      else errorSintaxis(esperados);
     
     
     
@@ -987,7 +987,7 @@ static void nexpr_primab(){
       token = tokens.get(0).tipo;
             String[] esperados = {"!","numero", "true", "false"  ,"identificador", "++", "--","(", "identificador de funcion"};
       
-     if(token.equals("not") token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
+     if(token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
       nexpr();
 	nexpr_primac();
         
@@ -995,7 +995,7 @@ static void nexpr_primab(){
         
       }
      
-      else errorStintaxis(esperados);
+      else errorSintaxis(esperados);
     
     
     
@@ -1005,21 +1005,22 @@ static void nexpr_primab(){
 
 	static void nexpr_primac(){     
         token = tokens.get(0).tipo;
-            String[] esperados = {||, ";" ,")", ","};
+            String[] esperados = {"||", ";" ,")", ","};
       if(token.equals("or")  )
         
         {
         
-        rexpr();
+        emparejar("or");
+	      lexpr_or();
       
         
       }
-     else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") token.equals("tk_coma")){
+     else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma")){
         
         
       }
      
-    else errorStintaxis(esperados);
+    else errorSintaxis(esperados);
     
     
     
@@ -1048,7 +1049,7 @@ static void nexpr_primab(){
         
       }
      
-      else errorStintaxis(esperados);
+      else errorSintaxis(esperados);
     
     
     
@@ -1067,7 +1068,7 @@ static void nexpr_primab(){
         
       }
      
-      else errorStintaxis(esperados);
+      else errorSintaxis(esperados);
     
     
     
@@ -1124,7 +1125,7 @@ static void nexpr_primab(){
       
      
      
-      else errorStintaxis(esperados);
+      else errorSintaxis(esperados);
     
     
     
@@ -1146,7 +1147,7 @@ static void nexpr_primab(){
         
       }
      
-      else errorStintaxis(esperados);
+      else errorSintaxis(esperados);
     
     
     
@@ -1156,7 +1157,7 @@ static void nexpr_primab(){
   
   static void t2(){        
       token = tokens.get(0).tipo;
-         String[] esperados = {"+","-","<","==","<=",">",">=","!=",||,";",")",",","&&"};
+         String[] esperados = {"+","-","<","==","<=",">",">=","!=","||",";",")",",","&&"};
       if(token.equals("tk_mas") )
         
         {
@@ -1186,7 +1187,7 @@ static void nexpr_primab(){
         
         
       }
-      else errorStintaxis(esperados);
+      else errorSintaxis(esperados);
     
     
     
@@ -1195,7 +1196,7 @@ static void nexpr_primab(){
   
   
   static void term(){        
-"true", "false" || token.equals("true") || token.equals("false")   
+  
       token = tokens.get(0).tipo;
       String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
       if( token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id") || token.equals("tk_incremento") ||
@@ -1209,7 +1210,7 @@ static void nexpr_primab(){
         
       }
      
-      else errorStintaxis(esperados);
+      else errorSintaxis(esperados);
     
     
     
@@ -1217,7 +1218,7 @@ static void nexpr_primab(){
   }  
    static void fa(){       
        token = tokens.get(0).tipo;
-       String[] esperados = {"*","/","%","+","-","<","==","<=",">",">=","!=",||,";",")",",","&&"};
+       String[] esperados = {"*","/","%","+","-","<","==","<=",">",">=","!=","||",";",")",",","&&"};
       if(token.equals("tk_mul") )
         
         {
@@ -1253,7 +1254,7 @@ static void nexpr_primab(){
         
         
       }
-      else errorStintaxis(esperados);
+      else errorSintaxis(esperados);
     
     
     
@@ -1310,7 +1311,7 @@ static void nexpr_primab(){
         emparejar("tk_num");
        	        
       }
-     else errorStintaxis(esperados);
+     else errorSintaxis(esperados);
     
     
     
@@ -1341,7 +1342,7 @@ static void nexpr_primab(){
         
         
       }
-      else errorStintaxis(esperados);
+      else errorSintaxis(esperados);
     
     
     
@@ -1362,7 +1363,7 @@ static void nexpr_primab(){
         f2();
         
       }
-      else errorStintaxis(esperados);
+      else errorSintaxis(esperados);
       
       
     }
@@ -1380,7 +1381,7 @@ static void nexpr_primab(){
         
         
       }
-      else errorStintaxis(esperados);
+      else errorSintaxis(esperados);
       
       
     }
@@ -1393,12 +1394,12 @@ static void nexpr_primab(){
         
       }
       
-      else if(token.equeals("false")){
+      else if(token.equals("false")){
         emparejar("false");
         
         
       }
-      else errorStintaxis(esperados);
+      else errorSintaxis(esperados);
       
       
     }
