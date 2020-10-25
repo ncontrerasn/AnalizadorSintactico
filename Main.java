@@ -571,7 +571,7 @@ public class Main {
     static void prog() {
         token = getToken();
         String[] esperados = {"function", "var","print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
-                "repeat", "for", "next", "break", "id", "--", "++", "end"};
+                "repeat", "for", "next", "break", "identificador", "--", "++", "end"};
         if (token.equals("function") || token.equals("var")||token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
                 token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
                 token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
@@ -587,7 +587,7 @@ public class Main {
     static void prog_fn() {
         token = getToken();
         String[] esperados = {"function", "var","print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
-                "repeat", "for", "next", "break", "id", "--", "++", "end"};
+                "repeat", "for", "next", "break", "identificador", "--", "++", "end"};
         if (token.equals("function")) {
             fn_decl_list();
             prog_fn();
@@ -606,7 +606,7 @@ public class Main {
     static void main_prog() {
         token = getToken();
         String[] esperados = {"var","print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
-                "repeat", "for", "next", "break", "id", "--", "++", "end"};
+                "repeat", "for", "next", "break", "identificador", "--", "++", "end"};
         if (token.equals("var")) {
             emparejar("var");
             var_decl();
@@ -629,7 +629,7 @@ public class Main {
     static void main_stmt() {
         token = getToken();
         String[] esperados = {"print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
-                "repeat", "for", "next", "break", "id", "--", "++", "end"};
+                "repeat", "for", "next", "break", "identificador", "--", "++", "end"};
         if (token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
                 token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
                 token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
@@ -648,7 +648,7 @@ public class Main {
     static void stmt() {
         token = getToken();
         String[] esperados = {"print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do", "repeat", "for",
-                "next", "break", "id", "--", "++"};
+                "next", "break", "identificador", "--", "++"};
         if (token.equals("print")) {
             emparejar("print");
             lexpr();
@@ -843,7 +843,7 @@ public class Main {
 
     static void var_decl() {
         token = getToken();
-        String[] esperados = {"id"};
+        String[] esperados = {"identificador"};
         if (token.equals("id")) {
             emparejar("id");
             emparejar("tk_dospuntos");
@@ -874,7 +874,7 @@ public class Main {
     static void stmt_block() {
         token = getToken();
         String[] esperados = {"{", "print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
-                "repeat", "for", "next", "break", "id", "--", "++"};
+                "repeat", "for", "next", "break", "identificador", "--", "++"};
         if (token.equals("tk_llave_izq")) {
             emparejar("tk_llave_izq");
             stmt();
@@ -895,7 +895,7 @@ public class Main {
     static void stmt_mas() {
         token = getToken();
         String[] esperados = {"print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
-                "repeat", "for", "next", "break", "id", "--", "++", "}"};
+                "repeat", "for", "next", "break", "identificador", "--", "++", "}"};
         if (token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
                 token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
                 token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
@@ -913,7 +913,7 @@ public class Main {
 
     static void lexpr() {
         token = getToken();
-        String[] esperados = {"not", "numero", "true", "false", "id", "++", "--", "(", "fid"};
+        String[] esperados = {"not", "numero", "true", "false", "identificador", "++", "--", "(", "identificador de funcion"};
         if (token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id") ||
                 token.equals("tk_incremento") || token.equals("tk_decremento") || token.equals("tk_par_izq") ||
                 token.equals("fid")) {
@@ -1206,7 +1206,7 @@ public class Main {
     static void fn_decl_list_withVAR(){
         token = getToken();
         String[] esperados = {"var", "{","print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
-                "repeat", "for", "next", "break", "id", "--", "++"};
+                "repeat", "for", "next", "break", "identificador", "--", "++"};
         if(token.equals("var")){
             emparejar("var");
             var_decl();
