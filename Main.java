@@ -1,14 +1,4 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author sergi
- */
-/*
 Desarrollado por:
 Hubert Tovar
 Sergio Gonzalez
@@ -25,7 +15,7 @@ public class Main {
     public static String token;
     public static int filaEOL = 1;
     public static int columnaEOL = 1;
-    public static String checkend = ""; 
+    public static String checkend = "";
 
     public static class Token {
 
@@ -72,10 +62,7 @@ public class Main {
     public static void main(String[] args) {
         analizadorLexico();
         prog();
-        //for (int i = 0; i < tokens.size(); i++)
-        //System.out.println(tokens.get(i).tipo);
         System.out.println("El analisis sintactico ha finalizado correctamente.");
-
     }
 
     static void analizadorLexico() {
@@ -92,7 +79,7 @@ public class Main {
         Token newTok = null;
 
         while (scanner.hasNext()) {
-        	filaEOL++;
+            filaEOL++;
             String s = scanner.nextLine();
             for (int i = 1; i < s.length(); i++)
                 if (s.charAt(i) == 35) {
@@ -122,7 +109,7 @@ public class Main {
                     estado = estadoAFD(numeroActual);
                     xToprint = x;
                 }
-                if (numeroActual == 10)//nueva lÌnea
+                if (numeroActual == 10)//nueva l√≠nea
                 {
                     y++;
                     x = 0;
@@ -156,7 +143,6 @@ public class Main {
                         } else {
                             y = y - fixY(numeroActual);
                             newTok = new Token("tk_num", lexemaActual, y, xToprint);
-                            //newTok.PrintTokenWithLexema();
                             tokens.add(newTok);
                             estado = 1;
                             lexemaActual = "";
@@ -167,7 +153,6 @@ public class Main {
                     case 4:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_num", lexemaActual, y, xToprint);
-                        //newTok.PrintTokenWithLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -191,12 +176,10 @@ public class Main {
                                     (y == 29 && lexemaActual.equals("end")) || (y == 39 && lexemaActual.equals("end")))
                                 newTok = new Token(lexemaActual, y - 1, xToprint);
                             else
-                                newTok = new Token(lexemaActual, y, xToprint);
-                            //newTok.PrintTokenWithoutLexema();
+                                newTok = new Token(lexemaActual, lexemaActual,y, xToprint);
                             tokens.add(newTok);
                         } else {
                             newTok = new Token("id", lexemaActual, y, xToprint);
-                            //newTok.PrintTokenWithLexema();
                             tokens.add(newTok);
                         }
                         estado = 1;
@@ -215,14 +198,12 @@ public class Main {
                         break;
                     case 8:
                         newTok = new Token("tk_incremento", "++",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         break;
                     case 9:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_mas", "+",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         i--;
@@ -231,7 +212,6 @@ public class Main {
                     case 10:
                         newTok = new Token("tk_sum_asig", "+=",y, xToprint);
                         tokens.add(newTok);
-                        //newTok.PrintTokenWithoutLexema();
                         estado = 1;
                         break;
                     case 11:
@@ -242,7 +222,6 @@ public class Main {
                         break;
                     case 12:
                         newTok = new Token("tk_igualdad", "==",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         break;
@@ -255,7 +234,6 @@ public class Main {
                     case 14:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_div", "/",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         i--;
@@ -263,7 +241,6 @@ public class Main {
                         break;
                     case 15:
                         newTok = new Token("tk_div_asig", "/=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         break;
@@ -276,7 +253,6 @@ public class Main {
                     case 17:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_mul", "*",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         i--;
@@ -284,7 +260,6 @@ public class Main {
                         break;
                     case 18:
                         newTok = new Token("tk_mul_asig", "*=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         break;
@@ -297,7 +272,6 @@ public class Main {
                     case 20:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_dospuntos", ":",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         i--;
@@ -305,7 +279,6 @@ public class Main {
                         break;
                     case 21:
                         newTok = new Token("tk_asignacion", ":=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         break;
@@ -329,7 +302,6 @@ public class Main {
                     case 24:
                         y = y - fixY(numeroActual);
                         newTok = new Token("fid", lexemaActual, y, xToprint);
-                        //newTok.PrintTokenWithLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -345,7 +317,6 @@ public class Main {
                     case 26://
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_mod", lexemaActual, y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -354,7 +325,6 @@ public class Main {
                         break;
                     case 27:
                         newTok = new Token("tk_mod_asig", "%=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -368,7 +338,6 @@ public class Main {
                     case 29:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_mayor", ">",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -377,7 +346,6 @@ public class Main {
                         break;
                     case 30:
                         newTok = new Token("tk_mayor_igual", "<=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -388,7 +356,6 @@ public class Main {
                         break;
                     case 32:
                         newTok = new Token("tk_diferente", "!=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -403,7 +370,6 @@ public class Main {
                         break;
                     case 34:
                         newTok = new Token("tk_decremento", "--",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -411,7 +377,6 @@ public class Main {
                     case 35:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_menos",lexemaActual, y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -420,7 +385,6 @@ public class Main {
                         break;
                     case 36:
                         newTok = new Token("tk_res_asig", "-=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -429,42 +393,34 @@ public class Main {
                         switch (numeroActual) {
                             case 40:
                                 newTok = new Token("tk_par_izq", "(",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 41:
                                 newTok = new Token("tk_par_der", ")",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 91:
                                 newTok = new Token("tk_cor_izq", "[",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 93:
                                 newTok = new Token("tk_cor_der", "]",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 123:
                                 newTok = new Token("tk_llave_izq", "{",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 125:
                                 newTok = new Token("tk_llave_der", "}",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 59:
                                 newTok = new Token("tk_puntoycoma", ";",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 44:
                                 newTok = new Token("tk_coma", ",",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                         }
@@ -481,7 +437,6 @@ public class Main {
                     case 39:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_menor", "<",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -490,7 +445,6 @@ public class Main {
                         break;
                     case 40:
                         newTok = new Token("tk_menor_igual", "<=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -505,7 +459,7 @@ public class Main {
                         break;
                     case 999:
                         y = y - fixY(numeroActual);
-                        System.out.println(">>> Error lÈxico(lÌnea:" + y + ",posiciÛn:" + xToprint + ")");
+                        System.out.println(">>> Error l√©xico(l√≠nea:" + y + ",posici√≥n:" + xToprint + ")");
                         return;
                 }
             }
@@ -571,17 +525,11 @@ public class Main {
         }
         String lexema = tokens.get(0).lexema;
         lexema = "'"+lexema+"'";
-        //System.out.println(lexema);
-        //if(lexema == null){
-        //  lexema = tokens.get(0).tipo;
-        //}
-        //System.out.println(lexema);
-        //System.out.println(lexema.length() == 0);
         System.out.println("<" + tokens.get(0).fila + ":" + tokens.get(0).columna + "> Error sintactico: se encontro: " + lexema +
                 "; se esperaba: " + respuesta + ".");
         System.exit(0);
     }
-    
+
     static void errorEND(String[] esperados) {
         String respuesta = "";
         for(int i = 0; i < esperados.length; i++){
@@ -597,15 +545,15 @@ public class Main {
                 "; se esperaba " + respuesta + ".");
         System.exit(0);
     }
-    
+
     static String getToken() {
         if(tokens.size()==0 && !checkend.equals("end"))
         {
-        	String[] esperados = {"end"};
-        	errorEND(esperados);
+            String[] esperados = {"end"};
+            errorEND(esperados);
         }else if (tokens.size()==1)
         {
-        	checkend = tokens.get(0).tipo;
+            checkend = tokens.get(0).tipo;
         }
         return tokens.get(0).tipo;
     }
@@ -615,8 +563,8 @@ public class Main {
         {
             tokens.remove(0);
         }else {
-        	String[] esperados = {s};
-        	errorSintaxis(esperados);
+            String[] esperados = {s};
+            errorSintaxis(esperados);
         }
     }
 
@@ -671,8 +619,8 @@ public class Main {
                 token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
                 token.equals("next") || token.equals("break") || token.equals("id") ||
                 token.equals("tk_decremento") || token.equals("tk_incremento")|| token.equals("end")) {
-        	main_stmt();
-        	emparejar("end");
+            main_stmt();
+            emparejar("end");
         }
         else
             errorSintaxis(esperados);
