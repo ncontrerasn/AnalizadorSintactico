@@ -88,15 +88,15 @@ TradT53: true , à
 TradT54: false , á
 NTs: [@, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, [, ], ^, _]
 expresions:[9, a, ;, b, c, d, e, f, (, ), g, h, i, j, k, l, m, n, o, p, :, q, r, s, t, u, v, w, x, y, z, 0, 1, 2, ,, {, }, &, |, !, <, 3, 4, >, 5, 6, +, -, *, /, %, 7, 8, à, á]
-grammar: [@: AB, A: GA, A: 9, B: aI;Cb, C: DC, C: 9, D: cM;, D: de;, D: f(M)gK, D: h(M)gKiK, D: j(M)gK, D: k(M)gK, D: lM;, D: m(M)gK, D: nK, D: gKE, D: op:K, D: q(M;M;M)gK, D: r;, D: s;, D: eF, D: te;, D: ue;, E: k(M), E: m(M), F: vM;, F: wM;, F: xM;, F: yM;, F: zM;, F: 0M;, F: u;, F: t;, G: 12:^(I)HK, H: aI;, H: 9, I: e:^J, J: ,e:^J, J: 9, K: {DL}, K: D, L: DL, L: 9, M: SN, N: &O, N: |Q, N: 9, O: SP, P: &O, P: 9, Q: SR, R: |Q, R: 9, S: !(M), S: T, T: VU, U: <V, U: 3V, U: 4V, U: >V, U: 5V, U: 6V, U: 9, V: XW, W: +XW, W: -XW, W: 9, X: ZY, Y: *ZY, Y: /ZY, Y: %ZY, Y: 9, Z: p, Z: _, Z: e[, Z: ue, Z: te, Z: (M), Z: 2(M]), [: u, [: t, [: 9, ]: ,M], ]: 9, ^: 7, ^: 8, _: à, _: á]
+grammar: [@: AB, A: GA, A: 9, B: aI;Cb, B: Cb, C: DC, C: 9, D: cM;, D: de;, D: f(M)gK, D: h(M)gKiK, D: j(M)gK, D: k(M)gK, D: lM;, D: m(M)gK, D: nK, D: gKE, D: op:K, D: q(M;M;M)gK, D: r;, D: s;, D: eF, D: te;, D: ue;, E: k(M), E: m(M), F: vM;, F: wM;, F: xM;, F: yM;, F: zM;, F: 0M;, F: u;, F: t;, G: 12:^(I)HK, H: aI;, H: 9, I: e:^J, J: ,e:^J, J: 9, K: {DL}, K: D, L: DL, L: 9, M: SN, N: &O, N: |Q, N: 9, O: SP, P: &O, P: 9, Q: SR, R: |Q, R: 9, S: !(M), S: T, T: VU, U: <V, U: 3V, U: 4V, U: >V, U: 5V, U: 6V, U: 9, V: XW, W: +XW, W: -XW, W: 9, X: ZY, Y: *ZY, Y: /ZY, Y: %ZY, Y: 9, Z: p, Z: _, Z: e[, Z: ue, Z: te, Z: (M), Z: 2(M]), [: u, [: t, [: 9, ]: ,M], ]: 9, ^: 7, ^: 8, _: à, _: á]
 //////////////////////
 /////////////////////
 /////////////////////
 First Set
 /////////////////////
-prog		-> TK_FUNCTION VAR 
+prog		-> TK_FUNCTION VAR TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_NEXT TK_BREAK ID -- ++ TK_END 
 prog_fn		-> TK_FUNCTION lambda 
-main_prog	-> VAR 
+main_prog	-> VAR TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_NEXT TK_BREAK ID -- ++ TK_END 
 main_stmt	-> TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_NEXT TK_BREAK ID -- ++ lambda 
 stmt		-> TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_NEXT TK_BREAK ID -- ++ 
 DO_sig		-> TK_WHILE TK_UNTIL 
@@ -129,13 +129,13 @@ TK_BOOL		-> true false
 Follow Set
 /////////////////////
 prog		-> $ 
-prog_fn		-> VAR 
+prog_fn		-> VAR TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_NEXT TK_BREAK ID -- ++ TK_END 
 main_prog	-> $ 
 main_stmt	-> TK_END 
 stmt		-> TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_NEXT TK_BREAK ID -- ++ TK_END } TK_ELSE TK_FUNCTION VAR 
 DO_sig		-> TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_NEXT TK_BREAK ID -- ++ TK_END } TK_ELSE TK_FUNCTION VAR 
 signo		-> TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_NEXT TK_BREAK ID -- ++ TK_END } TK_ELSE TK_FUNCTION VAR 
-fn_decl_list	-> TK_FUNCTION VAR 
+fn_decl_list	-> TK_FUNCTION VAR TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_NEXT TK_BREAK ID -- ++ TK_END 
 fn_decl_list_withVAR	-> { TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_NEXT TK_BREAK ID -- ++ 
 var_decl	-> ; ) 
 cont_data	-> ; ) 
@@ -162,10 +162,11 @@ TK_BOOL		-> * / % + - < == <= > >= != TK_AND TK_OR ; ) ,
 /////////////////////
 Predictions
 /////////////////////
-prog : prog_fn main_prog					{ TK_FUNCTION VAR }
+prog : prog_fn main_prog					{ TK_FUNCTION VAR TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_NEXT TK_BREAK ID -- ++ TK_END }
 prog_fn : fn_decl_list prog_fn					{ TK_FUNCTION }
-prog_fn : lambda					{ VAR }
+prog_fn : lambda					{ VAR TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_NEXT TK_BREAK ID -- ++ TK_END }
 main_prog : VAR var_decl ; main_stmt TK_END					{ VAR }
+main_prog : main_stmt TK_END					{ TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_NEXT TK_BREAK ID -- ++ TK_END }
 main_stmt : stmt main_stmt					{ TK_PRINT TK_INPUT TK_WHEN TK_IF TK_UNLESS TK_WHILE TK_RETURN TK_UNTIL TK_LOOP TK_DO TK_REPEAT TK_FOR TK_NEXT TK_BREAK ID -- ++ }
 main_stmt : lambda					{ TK_END }
 stmt : TK_PRINT lexpr ;					{ TK_PRINT }
