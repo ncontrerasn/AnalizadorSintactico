@@ -516,6 +516,24 @@ public class Main {
     }
 
     static void errorSintaxis(String[] esperados) {
+        Arrays.sort(esperados);
+        int posibleId=-1;
+        int posibleIdF=-1;
+        for(int i=0; i<esperados.length; i++){
+         if(esperados[i].equals("identificador")){
+             posibleId=i;
+         }
+          if(esperados[i].equals("identificador de funcion")){
+             posibleIdF=i;
+         }  
+            
+        }
+        if(posibleId!=-1 && posibleIdF!=-1){
+            esperados[posibleId]="identificador de funcion";
+            esperados[posibleIdF]="identificador";
+            
+            
+        }
         String respuesta = "";
         for(int i = 0; i < esperados.length; i++){
             if(i != esperados.length - 1)
