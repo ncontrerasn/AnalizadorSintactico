@@ -561,6 +561,7 @@ public class Main {
             lexema = tokens.get(0).tipo;
         System.out.println("<" + tokens.get(0).fila + ":" + tokens.get(0).columna + "> Error sintactico: se encontro: " + lexema +
                 "; se esperaba: " + respuesta + ".");
+	    System.exit(0); 
     }
 
     static void emparejar(String s) {
