@@ -1,14 +1,4 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author sergi
- */
-/*
 Desarrollado por:
 Hubert Tovar
 Sergio Gonzalez
@@ -19,10 +9,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class MySeconds {
+public class Main {
 
     public static ArrayList<Token> tokens = new ArrayList<>();
     public static String token;
+    public static int filaEOL = 1;
+    public static int columnaEOL = 1;
+    public static String checkend = "";
 
     public static class Token {
 
@@ -69,11 +62,7 @@ public class MySeconds {
     public static void main(String[] args) {
         analizadorLexico();
         prog();
-        //for (int i = 0; i < tokens.size(); i++)
-        //System.out.println(tokens.get(i).tipo);
         System.out.println("El analisis sintactico ha finalizado correctamente.");
-        System.out.println("Error sintactico: se encontro final de archivo; se esperaba ‘end’.");
-
     }
 
     static void analizadorLexico() {
@@ -90,6 +79,7 @@ public class MySeconds {
         Token newTok = null;
 
         while (scanner.hasNext()) {
+            filaEOL++;
             String s = scanner.nextLine();
             for (int i = 1; i < s.length(); i++)
                 if (s.charAt(i) == 35) {
@@ -153,7 +143,6 @@ public class MySeconds {
                         } else {
                             y = y - fixY(numeroActual);
                             newTok = new Token("tk_num", lexemaActual, y, xToprint);
-                            //newTok.PrintTokenWithLexema();
                             tokens.add(newTok);
                             estado = 1;
                             lexemaActual = "";
@@ -164,7 +153,6 @@ public class MySeconds {
                     case 4:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_num", lexemaActual, y, xToprint);
-                        //newTok.PrintTokenWithLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -188,12 +176,10 @@ public class MySeconds {
                                     (y == 29 && lexemaActual.equals("end")) || (y == 39 && lexemaActual.equals("end")))
                                 newTok = new Token(lexemaActual, y - 1, xToprint);
                             else
-                                newTok = new Token(lexemaActual, y, xToprint);
-                            //newTok.PrintTokenWithoutLexema();
+                                newTok = new Token(lexemaActual, lexemaActual,y, xToprint);
                             tokens.add(newTok);
                         } else {
                             newTok = new Token("id", lexemaActual, y, xToprint);
-                            //newTok.PrintTokenWithLexema();
                             tokens.add(newTok);
                         }
                         estado = 1;
@@ -212,14 +198,12 @@ public class MySeconds {
                         break;
                     case 8:
                         newTok = new Token("tk_incremento", "++",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         break;
                     case 9:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_mas", "+",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         i--;
@@ -228,7 +212,6 @@ public class MySeconds {
                     case 10:
                         newTok = new Token("tk_sum_asig", "+=",y, xToprint);
                         tokens.add(newTok);
-                        //newTok.PrintTokenWithoutLexema();
                         estado = 1;
                         break;
                     case 11:
@@ -239,7 +222,6 @@ public class MySeconds {
                         break;
                     case 12:
                         newTok = new Token("tk_igualdad", "==",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         break;
@@ -252,7 +234,6 @@ public class MySeconds {
                     case 14:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_div", "/",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         i--;
@@ -260,7 +241,6 @@ public class MySeconds {
                         break;
                     case 15:
                         newTok = new Token("tk_div_asig", "/=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         break;
@@ -273,7 +253,6 @@ public class MySeconds {
                     case 17:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_mul", "*",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         i--;
@@ -281,7 +260,6 @@ public class MySeconds {
                         break;
                     case 18:
                         newTok = new Token("tk_mul_asig", "*=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         break;
@@ -294,7 +272,6 @@ public class MySeconds {
                     case 20:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_dospuntos", ":",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         i--;
@@ -302,7 +279,6 @@ public class MySeconds {
                         break;
                     case 21:
                         newTok = new Token("tk_asignacion", ":=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         break;
@@ -326,7 +302,6 @@ public class MySeconds {
                     case 24:
                         y = y - fixY(numeroActual);
                         newTok = new Token("fid", lexemaActual, y, xToprint);
-                        //newTok.PrintTokenWithLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -342,7 +317,6 @@ public class MySeconds {
                     case 26://
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_mod", lexemaActual, y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -351,7 +325,6 @@ public class MySeconds {
                         break;
                     case 27:
                         newTok = new Token("tk_mod_asig", "%=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -365,7 +338,6 @@ public class MySeconds {
                     case 29:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_mayor", ">",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -374,7 +346,6 @@ public class MySeconds {
                         break;
                     case 30:
                         newTok = new Token("tk_mayor_igual", "<=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -385,7 +356,6 @@ public class MySeconds {
                         break;
                     case 32:
                         newTok = new Token("tk_diferente", "!=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -400,7 +370,6 @@ public class MySeconds {
                         break;
                     case 34:
                         newTok = new Token("tk_decremento", "--",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -408,7 +377,6 @@ public class MySeconds {
                     case 35:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_menos",lexemaActual, y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -417,7 +385,6 @@ public class MySeconds {
                         break;
                     case 36:
                         newTok = new Token("tk_res_asig", "-=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -426,42 +393,34 @@ public class MySeconds {
                         switch (numeroActual) {
                             case 40:
                                 newTok = new Token("tk_par_izq", "(",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 41:
                                 newTok = new Token("tk_par_der", ")",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 91:
                                 newTok = new Token("tk_cor_izq", "[",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 93:
                                 newTok = new Token("tk_cor_der", "]",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 123:
                                 newTok = new Token("tk_llave_izq", "{",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 125:
                                 newTok = new Token("tk_llave_der", "}",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 59:
                                 newTok = new Token("tk_puntoycoma", ";",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                             case 44:
                                 newTok = new Token("tk_coma", ",",y, xToprint);
-                                //newTok.PrintTokenWithoutLexema();
                                 tokens.add(newTok);
                                 break;
                         }
@@ -478,7 +437,6 @@ public class MySeconds {
                     case 39:
                         y = y - fixY(numeroActual);
                         newTok = new Token("tk_menor", "<",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -487,7 +445,6 @@ public class MySeconds {
                         break;
                     case 40:
                         newTok = new Token("tk_menor_igual", "<=",y, xToprint);
-                        //newTok.PrintTokenWithoutLexema();
                         tokens.add(newTok);
                         estado = 1;
                         lexemaActual = "";
@@ -567,26 +524,59 @@ public class MySeconds {
                 respuesta += "'" + esperados[i] + "'";
         }
         String lexema = tokens.get(0).lexema;
-        //System.out.println(lexema);
-        //if(lexema == null){
-          //  lexema = tokens.get(0).tipo;
-        //}
-        //System.out.println(lexema);
-        //System.out.println(lexema.length() == 0);
+        lexema = "'"+lexema+"'";
         System.out.println("<" + tokens.get(0).fila + ":" + tokens.get(0).columna + "> Error sintactico: se encontro: " + lexema +
                 "; se esperaba: " + respuesta + ".");
         System.exit(0);
     }
 
+    static void errorEND(String[] esperados) {
+        String respuesta = "";
+        for(int i = 0; i < esperados.length; i++){
+            if(i != esperados.length - 1)
+                respuesta += "'" + esperados[i] + "', ";
+            else
+                respuesta += "'" + esperados[i] + "'";
+        }
+        String lexema = "final de archivo";
+        int fila = filaEOL+1;
+        int columna =columnaEOL;
+        System.out.println("<" + fila + ":" + columna + "> Error sintactico: se encontro " + lexema +
+                "; se esperaba " + respuesta + ".");
+        System.exit(0);
+    }
+
+    static String getToken() {
+        if(tokens.size()==0 && !checkend.equals("end"))
+        {
+            String[] esperados = {"end"};
+            errorEND(esperados);
+        }else if (tokens.size()==1)
+        {
+            checkend = tokens.get(0).tipo;
+        }
+        return tokens.get(0).tipo;
+    }
+
     static void emparejar(String s) {
         if(tokens.get(0).tipo.equals(s))
+        {
             tokens.remove(0);
+        }else {
+            String[] esperados = {s};
+            errorSintaxis(esperados);
+        }
     }
 
     static void prog() {
-        token = tokens.get(0).tipo;
-        String[] esperados = {"function", "var"};
-        if (token.equals("function") || token.equals("var")) {
+        token = getToken();
+        String[] esperados = {"function", "var","print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
+                "repeat", "for", "next", "break", "id", "--", "++", "end"};
+        if (token.equals("function") || token.equals("var")||token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
+                token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
+                token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
+                token.equals("next") || token.equals("break") || token.equals("id") ||
+                token.equals("tk_decremento") || token.equals("tk_incremento")|| token.equals("end")) {
             prog_fn();
             main_prog();
         }
@@ -595,13 +585,18 @@ public class MySeconds {
     }
 
     static void prog_fn() {
-        token = tokens.get(0).tipo;
-        String[] esperados = {"function", "var"};
+        token = getToken();
+        String[] esperados = {"function", "var","print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
+                "repeat", "for", "next", "break", "id", "--", "++", "end"};
         if (token.equals("function")) {
             fn_decl_list();
             prog_fn();
         }
-        else if (token.equals("var")) {
+        else if (token.equals("var")||token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
+                token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
+                token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
+                token.equals("next") || token.equals("break") || token.equals("id") ||
+                token.equals("tk_decremento") || token.equals("tk_incremento")|| token.equals("end")) {
             //lambda
         }
         else
@@ -609,25 +604,30 @@ public class MySeconds {
     }
 
     static void main_prog() {
-        token = tokens.get(0).tipo;
-        String[] esperados = {"var", "end"};
+        token = getToken();
+        String[] esperados = {"var","print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
+                "repeat", "for", "next", "break", "id", "--", "++", "end"};
         if (token.equals("var")) {
             emparejar("var");
             var_decl();
             emparejar("tk_puntoycoma");
             main_stmt();
             emparejar("end");
-        }else if (token.equals("end")) {
-            System.out.println("entramos al end");
+        }
+        else if (token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
+                token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
+                token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
+                token.equals("next") || token.equals("break") || token.equals("id") ||
+                token.equals("tk_decremento") || token.equals("tk_incremento")|| token.equals("end")) {
+            main_stmt();
             emparejar("end");
-           
         }
         else
             errorSintaxis(esperados);
     }
 
     static void main_stmt() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
                 "repeat", "for", "next", "break", "id", "--", "++", "end"};
         if (token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
@@ -646,7 +646,7 @@ public class MySeconds {
     }
 
     static void stmt() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do", "repeat", "for",
                 "next", "break", "id", "--", "++"};
         if (token.equals("print")) {
@@ -760,7 +760,7 @@ public class MySeconds {
     }
 
     static void DO_sig() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"while", "until"};
         if (token.equals("while")) {
             emparejar("while");
@@ -779,7 +779,7 @@ public class MySeconds {
     }
 
     static void signo() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {":=", "+=", "-=", "*=", "/=", "%=", "++", "--"};
         if (token.equals("tk_asignacion")) {
             emparejar("tk_asignacion");
@@ -824,7 +824,7 @@ public class MySeconds {
     }
 
     static void fn_decl_list() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"function"};
         if (token.equals("function")) {
             emparejar("function");
@@ -842,7 +842,7 @@ public class MySeconds {
     }
 
     static void var_decl() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"id"};
         if (token.equals("id")) {
             emparejar("id");
@@ -855,7 +855,7 @@ public class MySeconds {
     }
 
     static void cont_data() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {",", ";", ")"};
         if (token.equals("tk_coma")) {
             emparejar("tk_coma");
@@ -872,7 +872,7 @@ public class MySeconds {
     }
 
     static void stmt_block() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"{", "print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
                 "repeat", "for", "next", "break", "id", "--", "++"};
         if (token.equals("tk_llave_izq")) {
@@ -893,7 +893,7 @@ public class MySeconds {
     }
 
     static void stmt_mas() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
                 "repeat", "for", "next", "break", "id", "--", "++", "}"};
         if (token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
@@ -912,7 +912,7 @@ public class MySeconds {
     }
 
     static void lexpr() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"not", "numero", "true", "false", "id", "++", "--", "(", "fid"};
         if (token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id") ||
                 token.equals("tk_incremento") || token.equals("tk_decremento") || token.equals("tk_par_izq") ||
@@ -925,7 +925,7 @@ public class MySeconds {
     }
 
     static void nexpr_prima(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"||","&&", ";",")",","};
         if(token.equals("or")){
             emparejar("or");
@@ -941,7 +941,7 @@ public class MySeconds {
     }
 
     static void lexpr_and(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"!","numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
         if(token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
             nexpr();
@@ -951,7 +951,7 @@ public class MySeconds {
     }
 
     static void nexpr_primab(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"&&", ";" ,")", ","};
         if(token.equals("and") ){
             emparejar("and");
@@ -966,7 +966,7 @@ public class MySeconds {
 
     static void lexpr_or(){
 
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"!","numero", "true", "false"  ,"identificador", "++", "--","(", "identificador de funcion"};
 
         if(token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
@@ -977,7 +977,7 @@ public class MySeconds {
     }
 
     static void nexpr_primac(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"||", ";" ,")", ","};
         if(token.equals("or") ){
             emparejar("or");
@@ -1004,7 +1004,7 @@ public class MySeconds {
     }
 
     static void rexpr(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
         if(token.equals("tk_num") || token.equals("true") || token.equals("false")  || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
             simple_expr();
@@ -1014,7 +1014,7 @@ public class MySeconds {
     }
 
     static void sig(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"<", "==", "<=", ">",">=","!=","&&","||",";",")",","};
         if(token.equals("tk_menor")){
             emparejar("tk_menor");
@@ -1041,13 +1041,13 @@ public class MySeconds {
             simple_expr();
         }
         else if(token.equals("and")||token.equals("or")||token.equals("tk_puntoycoma")||token.equals("tk_par_der")||token.equals("tk_coma")){
-        	//lambda
+            //lambda
         }
         else errorSintaxis(esperados);
     }
 
     static void simple_expr(){
-        token = tokens.get(0).tipo;
+        token = getToken();
 
         String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
         if(token.equals("tk_num") || token.equals("true") || token.equals("false")  || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
@@ -1058,7 +1058,7 @@ public class MySeconds {
     }
 
     static void t2(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"+","-","<","==","<=",">",">=","!=","||",";",")",",","&&"};
         if(token.equals("tk_mas")){
             emparejar("tk_mas");
@@ -1078,7 +1078,7 @@ public class MySeconds {
     }
 
     static void term(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
         if( token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id") || token.equals("tk_incremento") ||
                 token.equals("tk_decremento") || token.equals("tk_par_izq") || token.equals("fid")){
@@ -1089,7 +1089,7 @@ public class MySeconds {
     }
 
     static void fa(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"*","/","%","+","-","<","==","<=",">",">=","!=","||",";",")",",","&&"};
         if(token.equals("tk_mul")){
             emparejar("tk_mul");
@@ -1115,7 +1115,7 @@ public class MySeconds {
     }
 
     static void factor(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"identificador de funcion", "(", "++", "identificador", "true", "false", "numero","--"};
         if(token.equals("fid") )
         {
@@ -1152,7 +1152,7 @@ public class MySeconds {
     }
 
     static void s(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"*", "/","%","+","-","<","==","<=",">",">=","!=", "||", ";", ")" , ",", "&&","--","++"};
         if(token.equals("tk_mul") || token.equals("tk_div") || token.equals("tk_mod") || token.equals("tk_mas") || token.equals("tk_menos") || token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
                 || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or") || token.equals("tk_puntoycoma") ||
@@ -1168,7 +1168,7 @@ public class MySeconds {
     }
 
     static void f2(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {")",","};
         if(token.equals("tk_par_der") ){
         }
@@ -1180,8 +1180,8 @@ public class MySeconds {
         else errorSintaxis(esperados);
     }
     static void DATATYPE(){
-        token = tokens.get(0).tipo;
-        String[] esperados = {"num","bool"};
+        token = getToken();
+        String[] esperados = {"bool","num"};
         if(token.equals("num") ){
             emparejar("num");
         }
@@ -1192,7 +1192,7 @@ public class MySeconds {
     }
 
     static void TK_BOOL(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"true","false"};
         if(token.equals("true" )){
             emparejar("true");
@@ -1202,9 +1202,9 @@ public class MySeconds {
         }
         else errorSintaxis(esperados);
     }
-    
+
     static void fn_decl_list_withVAR(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"var", "{","print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
                 "repeat", "for", "next", "break", "id", "--", "++"};
         if(token.equals("var")){
