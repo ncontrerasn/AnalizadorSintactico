@@ -908,7 +908,9 @@ public class Main {
     }
 
 
-    public void nexpr_prima(){       
+
+
+    static void nexpr_prima(){       
         token = tokens.get(0).tipo;
               String[] esperados = {"||","&&", ";",")",","};
       if(token.equals("or"))
@@ -935,11 +937,11 @@ public class Main {
     
     
   }  
-  
-   public void lexpr_and(){      
+
+   static void lexpr_and(){      
        token = tokens.get(0).tipo;
-        String[] esperados = {"!","numero", "bool" ,"identificador", "++", "--","(", "identificador de funcion"};
-      if(token.equals("not") token.equals("num") || token.equals("bool") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
+        String[] esperados = {"!","numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
+      if(token.equals("not") token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
         
         {
         
@@ -956,7 +958,7 @@ public class Main {
     
     
   }  
-public void nexpr_primab(){       
+static void nexpr_primab(){       
     token = tokens.get(0).tipo;
           String[] esperados = {"&&", ";" ,")", ","};
       if(token.equals("and")  )
@@ -980,11 +982,12 @@ public void nexpr_primab(){
   }  
   
   
-  public void lexpr_or(){      
+  static void lexpr_or(){      
+
       token = tokens.get(0).tipo;
-            String[] esperados = {"!","numero", "bool" ,"identificador", "++", "--","(", "identificador de funcion"};
+            String[] esperados = {"!","numero", "true", "false"  ,"identificador", "++", "--","(", "identificador de funcion"};
       
-     if(token.equals("not") token.equals("num") || token.equals("bool") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
+     if(token.equals("not") token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
       nexpr();
 	nexpr_primac();
         
@@ -1000,7 +1003,7 @@ public void nexpr_primab(){
   }  
 
 
-	public void nexpr_primac(){     
+	static void nexpr_primac(){     
         token = tokens.get(0).tipo;
             String[] esperados = {||, ";" ,")", ","};
       if(token.equals("or")  )
@@ -1023,10 +1026,11 @@ public void nexpr_primab(){
     
   }  
   
-   public void nexpr(){        
-       token = tokens.get(0).tipo;
-        String[] esperados = {"numero", "bool" ,"identificador", "++", "--","(", "identificador de funcion","!"};
-      if(token.equals("num") || token.equals("bool") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
+   static void nexpr(){        
+  
+
+        String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion","!"};
+      if(token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
         
         {
         
@@ -1050,10 +1054,11 @@ public void nexpr_primab(){
     
     
   }  
-   public void rexpr(){        
+   static void rexpr(){    
+ 
        token = tokens.get(0).tipo;
-        String[] esperados = {"numero", "bool" ,"identificador", "++", "--","(", "identificador de funcion"};
-      if(token.equals("num") || token.equals("bool") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
+        String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
+      if(token.equals("tk_num") || token.equals("true") || token.equals("false")  || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
         
         {
         
@@ -1062,13 +1067,13 @@ public void nexpr_primab(){
         
       }
      
-      else errorStintaxis("num", "bool" ,"id", "tk_incremento", "tk_decremento","tk_par_izq", "fid");
+      else errorStintaxis(esperados);
     
     
     
     
   }  
-    public void sig(){        
+    static void sig(){        
         token = tokens.get(0).tipo;
         String[] esperados = {"<", "==", "<=", ">",">=","!="};
       if(token.equals("tk_menor") )
@@ -1127,10 +1132,11 @@ public void nexpr_primab(){
   }  
   
   
-  public void simple_expr(){        
+  static void simple_expr(){        
       token = tokens.get(0).tipo;
-        String[] esperados = {"numero", "bool" ,"identificador", "++", "--","(", "identificador de funcion"};
-      if(token.equals("num") || token.equals("bool") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
+
+        String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
+      if(token.equals("tk_num") || token.equals("true") || token.equals("false")  || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
         
         {
         
@@ -1148,7 +1154,7 @@ public void nexpr_primab(){
   }  
   
   
-  public void t2(){        
+  static void t2(){        
       token = tokens.get(0).tipo;
          String[] esperados = {"+","-","<","==","<=",">",">=","!=",||,";",")",",","&&"};
       if(token.equals("tk_mas") )
@@ -1188,10 +1194,11 @@ public void nexpr_primab(){
   }  
   
   
-  public void term(){        
+  static void term(){        
+"true", "false" || token.equals("true") || token.equals("false")   
       token = tokens.get(0).tipo;
-      String[] esperados = {"numero", "bool" ,"identificador", "++", "--","(", "identificador de funcion"};
-      if( token.equals("num") || token.equals("bool") || token.equals("id") || token.equals("tk_incremento") ||
+      String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
+      if( token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id") || token.equals("tk_incremento") ||
                 token.equals("tk_decremento") || token.equals("tk_par_izq") || token.equals("fid"))
         
         {
@@ -1208,7 +1215,7 @@ public void nexpr_primab(){
     
     
   }  
-   public void fa(){       
+   static void fa(){       
        token = tokens.get(0).tipo;
        String[] esperados = {"*","/","%","+","-","<","==","<=",">",">=","!=",||,";",")",",","&&"};
       if(token.equals("tk_mul") )
@@ -1253,9 +1260,9 @@ public void nexpr_primab(){
     
   }  
   
-   public void factor(){        
+   static void factor(){        
        token = tokens.get(0).tipo;
-       String[] esperados = {"identificador de funcion", "(", "++", "identificador", "bool", "numero","--"};
+       String[] esperados = {"identificador de funcion", "(", "++", "identificador", "true", "false", "numero","--"};
       if(token.equals("fid") )
         
         {
@@ -1292,10 +1299,13 @@ public void nexpr_primab(){
        	 s();
                       
       }
-      else if(token.equals("bool")){
-        emparejar("bool");
+     
+	else if(token.equals("true") || token.equals("false")){
+        TK_BOOL();
        	        
       }
+
+	
      else if(token.equals("tk_num")){
         emparejar("tk_num");
        	        
@@ -1307,7 +1317,7 @@ public void nexpr_primab(){
     
   }  
   
-   public void s(){        
+   static void s(){        
        token = tokens.get(0).tipo;
        String[] esperados = {"*", "/","%","+","-","<","==","<=",">",">=","!=", "||", ";", ")" , ",", "&&","--","++"};
       if(token.equals("tk_mul") || token.equals("tk_div") || token.equals("tk_mod") || token.equals("tk_mas") || token.equals("tk_menos") || token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
@@ -1338,15 +1348,15 @@ public void nexpr_primab(){
     
   }  
   	
-  public void f2(){        
+  static void f2(){        
       token = tokens.get(0).tipo;
             String[] esperados = {")",","};
-      if(token == "tk_par_der" ){
+      if(token.equals("tk_par_der") ){
         
         
       }
       
-      else if(token == "tk_coma"){
+      else if(token.equals("tk_coma")){
         emparejar("tk_coma");
         lexpr();
         f2();
@@ -1356,3 +1366,41 @@ public void nexpr_primab(){
       
       
     }
+
+	static void DATATYPE(){        
+      token = tokens.get(0).tipo;
+            String[] esperados = {"num","bool"};
+      if(token.equals("num") ){
+        emparejar("num");
+        
+      }
+      
+      else if(token.equals("bool")){
+        emparejar("bool");
+        
+        
+      }
+      else errorStintaxis(esperados);
+      
+      
+    }
+
+    static void TK_BOOL(){        
+      token = tokens.get(0).tipo;
+            String[] esperados = {"true","false"};
+      if(token.equals("true" )){
+        emparejar("true");
+        
+      }
+      
+      else if(token.equeals("false")){
+        emparejar("false");
+        
+        
+      }
+      else errorStintaxis(esperados);
+      
+      
+    }
+	
+	
