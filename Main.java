@@ -520,19 +520,19 @@ public class Main {
         int posibleId=-1;
         int posibleIdF=-1;
         for(int i=0; i<esperados.length; i++){
-         if(esperados[i].equals("identificador")){
-             posibleId=i;
-         }
-          if(esperados[i].equals("identificador de funcion")){
-             posibleIdF=i;
-         }  
-            
+            if(esperados[i].equals("identificador")){
+                posibleId=i;
+            }
+            if(esperados[i].equals("identificador de funcion")){
+                posibleIdF=i;
+            }
+
         }
         if(posibleId!=-1 && posibleIdF!=-1){
             esperados[posibleId]="identificador de funcion";
             esperados[posibleIdF]="identificador";
-            
-            
+
+
         }
         String respuesta = "";
         for(int i = 0; i < esperados.length; i++){
@@ -944,7 +944,7 @@ public class Main {
 
     static void nexpr_prima(){
         token = getToken();
-        String[] esperados = {"||","&&", ";",")",","};
+        String[] esperados = {"or","and", ";",")",","};
         if(token.equals("or")){
             emparejar("or");
             lexpr_or();
@@ -960,7 +960,7 @@ public class Main {
 
     static void lexpr_and(){
         token = getToken();
-        String[] esperados = {"!","numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
+        String[] esperados = {"not","numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
         if(token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
             nexpr();
             nexpr_primab();
@@ -970,7 +970,7 @@ public class Main {
 
     static void nexpr_primab(){
         token = getToken();
-        String[] esperados = {"&&", ";" ,")", ","};
+        String[] esperados = {"and", ";" ,")", ","};
         if(token.equals("and") ){
             emparejar("and");
             lexpr_and();
@@ -985,7 +985,7 @@ public class Main {
     static void lexpr_or(){
 
         token = getToken();
-        String[] esperados = {"!","numero", "true", "false"  ,"identificador", "++", "--","(", "identificador de funcion"};
+        String[] esperados = {"not","numero", "true", "false"  ,"identificador", "++", "--","(", "identificador de funcion"};
 
         if(token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
             nexpr();
@@ -996,7 +996,7 @@ public class Main {
 
     static void nexpr_primac(){
         token = getToken();
-        String[] esperados = {"||", ";" ,")", ","};
+        String[] esperados = {"or", ";" ,")", ","};
         if(token.equals("or") ){
             emparejar("or");
             lexpr_or();
@@ -1033,7 +1033,7 @@ public class Main {
 
     static void sig(){
         token = getToken();
-        String[] esperados = {"<", "==", "<=", ">",">=","!=","&&","||",";",")",","};
+        String[] esperados = {"<", "==", "<=", ">",">=","!=","and","or",";",")",","};
         if(token.equals("tk_menor")){
             emparejar("tk_menor");
             simple_expr();
@@ -1077,7 +1077,7 @@ public class Main {
 
     static void t2(){
         token = getToken();
-        String[] esperados = {"+","-","<","==","<=",">",">=","!=","||",";",")",",","&&"};
+        String[] esperados = {"+","-","<","==","<=",">",">=","!=","or",";",")",",","and"};
         if(token.equals("tk_mas")){
             emparejar("tk_mas");
             term();
@@ -1108,7 +1108,7 @@ public class Main {
 
     static void fa(){
         token = getToken();
-        String[] esperados = {"*","/","%","+","-","<","==","<=",">",">=","!=","||",";",")",",","&&"};
+        String[] esperados = {"*","/","%","+","-","<","==","<=",">",">=","!=","or",";",")",",","and"};
         if(token.equals("tk_mul")){
             emparejar("tk_mul");
             factor();
@@ -1171,7 +1171,7 @@ public class Main {
 
     static void s(){
         token = getToken();
-        String[] esperados = {"*", "/","%","+","-","<","==","<=",">",">=","!=", "||", ";", ")" , ",", "&&","--","++"};
+        String[] esperados = {"*", "/","%","+","-","<","==","<=",">",">=","!=", "or", ";", ")" , ",", "and","--","++"};
         if(token.equals("tk_mul") || token.equals("tk_div") || token.equals("tk_mod") || token.equals("tk_mas") || token.equals("tk_menos") || token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
                 || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or") || token.equals("tk_puntoycoma") ||
                 token.equals("tk_par_der") || token.equals("tk_coma") || token.equals("and") ){
