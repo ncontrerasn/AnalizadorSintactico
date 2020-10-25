@@ -1,4 +1,14 @@
 /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author sergi
+ */
+/*
 Desarrollado por:
 Hubert Tovar
 Sergio Gonzalez
@@ -9,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main {
+public class MySeconds {
 
     public static ArrayList<Token> tokens = new ArrayList<>();
     public static String token;
@@ -62,7 +72,7 @@ public class Main {
         //for (int i = 0; i < tokens.size(); i++)
         //System.out.println(tokens.get(i).tipo);
         System.out.println("El analisis sintactico ha finalizado correctamente.");
-        System.out.println("Error sintactico: se encontro final de archivo; se esperaba ëendí.");
+        System.out.println("Error sintactico: se encontro final de archivo; se esperaba ‚Äòend‚Äô.");
 
     }
 
@@ -109,7 +119,7 @@ public class Main {
                     estado = estadoAFD(numeroActual);
                     xToprint = x;
                 }
-                if (numeroActual == 10)//nueva lÌnea
+                if (numeroActual == 10)//nueva l√≠nea
                 {
                     y++;
                     x = 0;
@@ -492,7 +502,7 @@ public class Main {
                         break;
                     case 999:
                         y = y - fixY(numeroActual);
-                        System.out.println(">>> Error lÈxico(lÌnea:" + y + ",posiciÛn:" + xToprint + ")");
+                        System.out.println(">>> Error l√©xico(l√≠nea:" + y + ",posici√≥n:" + xToprint + ")");
                         return;
                 }
             }
@@ -600,13 +610,17 @@ public class Main {
 
     static void main_prog() {
         token = tokens.get(0).tipo;
-        String[] esperados = {"var"};
+        String[] esperados = {"var", "end"};
         if (token.equals("var")) {
             emparejar("var");
             var_decl();
             emparejar("tk_puntoycoma");
             main_stmt();
             emparejar("end");
+        }else if (token.equals("end")) {
+            System.out.println("entramos al end");
+            emparejar("end");
+           
         }
         else
             errorSintaxis(esperados);
