@@ -2,7 +2,7 @@ prog: prog_fn main_prog
 prog_fn: fn_decl_list prog_fn
 prog_fn: lambda
 main_prog: VAR var_decl ; main_stmt TK_END
-main_prog: TK_END
+main_prog: main_stmt TK_END
 main_stmt: stmt main_stmt
 main_stmt: lambda
 stmt: TK_PRINT lexpr ;

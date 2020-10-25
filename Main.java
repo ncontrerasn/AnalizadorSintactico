@@ -23,6 +23,9 @@ public class Main {
 
     public static ArrayList<Token> tokens = new ArrayList<>();
     public static String token;
+    public static int filaEOL = 1;
+    public static int columnaEOL = 1;
+    public static String checkend = ""; 
 
     public static class Token {
 
@@ -72,7 +75,6 @@ public class Main {
         //for (int i = 0; i < tokens.size(); i++)
         //System.out.println(tokens.get(i).tipo);
         System.out.println("El analisis sintactico ha finalizado correctamente.");
-        System.out.println("Error sintactico: se encontro final de archivo; se esperaba â€˜endâ€™.");
 
     }
 
@@ -90,6 +92,7 @@ public class Main {
         Token newTok = null;
 
         while (scanner.hasNext()) {
+        	filaEOL++;
             String s = scanner.nextLine();
             for (int i = 1; i < s.length(); i++)
                 if (s.charAt(i) == 35) {
@@ -119,7 +122,7 @@ public class Main {
                     estado = estadoAFD(numeroActual);
                     xToprint = x;
                 }
-                if (numeroActual == 10)//nueva lÃ­nea
+                if (numeroActual == 10)//nueva línea
                 {
                     y++;
                     x = 0;
@@ -502,7 +505,7 @@ public class Main {
                         break;
                     case 999:
                         y = y - fixY(numeroActual);
-                        System.out.println(">>> Error lÃ©xico(lÃ­nea:" + y + ",posiciÃ³n:" + xToprint + ")");
+                        System.out.println(">>> Error léxico(línea:" + y + ",posición:" + xToprint + ")");
                         return;
                 }
             }
@@ -567,6 +570,7 @@ public class Main {
                 respuesta += "'" + esperados[i] + "'";
         }
         String lexema = tokens.get(0).lexema;
+        lexema = "'"+lexema+"'";
         //System.out.println(lexema);
         //if(lexema == null){
         //  lexema = tokens.get(0).tipo;
@@ -577,58 +581,84 @@ public class Main {
                 "; se esperaba: " + respuesta + ".");
         System.exit(0);
     }
+    
+    static void errorEND(String[] esperados) {
+        String respuesta = "";
+        for(int i = 0; i < esperados.length; i++){
+            if(i != esperados.length - 1)
+                respuesta += "'" + esperados[i] + "', ";
+            else
+                respuesta += "'" + esperados[i] + "'";
+        }
+        String lexema = "final de archivo";
+        int fila = filaEOL+1;
+        int columna =columnaEOL;
+        System.out.println("<" + fila + ":" + columna + "> Error sintactico: se encontro " + lexema +
+                "; se esperaba " + respuesta + ".");
+        System.exit(0);
+    }
+    
+    static String getToken() {
+        if(tokens.size()==0 && !checkend.equals("end"))
+        {
+        	String[] esperados = {"end"};
+        	errorEND(esperados);
+        }else if (tokens.size()==1)
+        {
+        	checkend = tokens.get(0).tipo;
+        }
+        return tokens.get(0).tipo;
+    }
 
     static void emparejar(String s) {
         if(tokens.get(0).tipo.equals(s))
+        {
             tokens.remove(0);
+        }else {
+        	String[] esperados = {s};
+        	errorSintaxis(esperados);
+        }
     }
 
     static void prog() {
-        token = tokens.get(0).tipo;
-        String[] esperados = {"function", "var", "end"};
-        if (token.equals("function") || token.equals("var")) {
-            System.out.println("antes pfn");
+        token = getToken();
+        String[] esperados = {"function", "var","print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
+                "repeat", "for", "next", "break", "id", "--", "++", "end"};
+        if (token.equals("function") || token.equals("var")||token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
+                token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
+                token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
+                token.equals("next") || token.equals("break") || token.equals("id") ||
+                token.equals("tk_decremento") || token.equals("tk_incremento")|| token.equals("end")) {
             prog_fn();
-            System.out.println("despues pfn");
             main_prog();
-        }
-        else if (token.equals("end")) {
-            System.out.println("entramos al end");
-            emparejar("end");
-
         }
         else
             errorSintaxis(esperados);
     }
 
     static void prog_fn() {
-        token = tokens.get(0).tipo;
-        String[] esperados = {"function", "var", "end"};
-        System.out.println(token);
-        System.out.println(tokens.get(1).tipo);
+        token = getToken();
+        String[] esperados = {"function", "var","print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
+                "repeat", "for", "next", "break", "id", "--", "++", "end"};
         if (token.equals("function")) {
             fn_decl_list();
             prog_fn();
         }
-        else if (token.equals("var")) {
+        else if (token.equals("var")||token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
+                token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
+                token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
+                token.equals("next") || token.equals("break") || token.equals("id") ||
+                token.equals("tk_decremento") || token.equals("tk_incremento")|| token.equals("end")) {
             //lambda
-        }
-        else if (token.equals("end")) {
-            System.out.println("entramos al end");
-            emparejar("end");
-            if(tokens.size() == 0){
-                System.out.println("El analisis sintactico ha finalizado correctamente.");
-                System.exit(0);
-            }
-
         }
         else
             errorSintaxis(esperados);
     }
 
     static void main_prog() {
-        token = tokens.get(0).tipo;
-        String[] esperados = {"var"};
+        token = getToken();
+        String[] esperados = {"var","print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
+                "repeat", "for", "next", "break", "id", "--", "++", "end"};
         if (token.equals("var")) {
             emparejar("var");
             var_decl();
@@ -636,12 +666,20 @@ public class Main {
             main_stmt();
             emparejar("end");
         }
+        else if (token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
+                token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
+                token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
+                token.equals("next") || token.equals("break") || token.equals("id") ||
+                token.equals("tk_decremento") || token.equals("tk_incremento")|| token.equals("end")) {
+        	main_stmt();
+        	emparejar("end");
+        }
         else
             errorSintaxis(esperados);
     }
 
     static void main_stmt() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
                 "repeat", "for", "next", "break", "id", "--", "++", "end"};
         if (token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
@@ -660,7 +698,7 @@ public class Main {
     }
 
     static void stmt() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do", "repeat", "for",
                 "next", "break", "id", "--", "++"};
         if (token.equals("print")) {
@@ -774,7 +812,7 @@ public class Main {
     }
 
     static void DO_sig() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"while", "until"};
         if (token.equals("while")) {
             emparejar("while");
@@ -793,7 +831,7 @@ public class Main {
     }
 
     static void signo() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {":=", "+=", "-=", "*=", "/=", "%=", "++", "--"};
         if (token.equals("tk_asignacion")) {
             emparejar("tk_asignacion");
@@ -838,7 +876,7 @@ public class Main {
     }
 
     static void fn_decl_list() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"function"};
         if (token.equals("function")) {
             emparejar("function");
@@ -856,7 +894,7 @@ public class Main {
     }
 
     static void var_decl() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"id"};
         if (token.equals("id")) {
             emparejar("id");
@@ -869,7 +907,7 @@ public class Main {
     }
 
     static void cont_data() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {",", ";", ")"};
         if (token.equals("tk_coma")) {
             emparejar("tk_coma");
@@ -886,7 +924,7 @@ public class Main {
     }
 
     static void stmt_block() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"{", "print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
                 "repeat", "for", "next", "break", "id", "--", "++"};
         if (token.equals("tk_llave_izq")) {
@@ -907,7 +945,7 @@ public class Main {
     }
 
     static void stmt_mas() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
                 "repeat", "for", "next", "break", "id", "--", "++", "}"};
         if (token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
@@ -926,7 +964,7 @@ public class Main {
     }
 
     static void lexpr() {
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"not", "numero", "true", "false", "id", "++", "--", "(", "fid"};
         if (token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id") ||
                 token.equals("tk_incremento") || token.equals("tk_decremento") || token.equals("tk_par_izq") ||
@@ -939,7 +977,7 @@ public class Main {
     }
 
     static void nexpr_prima(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"||","&&", ";",")",","};
         if(token.equals("or")){
             emparejar("or");
@@ -955,7 +993,7 @@ public class Main {
     }
 
     static void lexpr_and(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"!","numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
         if(token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
             nexpr();
@@ -965,7 +1003,7 @@ public class Main {
     }
 
     static void nexpr_primab(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"&&", ";" ,")", ","};
         if(token.equals("and") ){
             emparejar("and");
@@ -980,7 +1018,7 @@ public class Main {
 
     static void lexpr_or(){
 
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"!","numero", "true", "false"  ,"identificador", "++", "--","(", "identificador de funcion"};
 
         if(token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
@@ -991,7 +1029,7 @@ public class Main {
     }
 
     static void nexpr_primac(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"||", ";" ,")", ","};
         if(token.equals("or") ){
             emparejar("or");
@@ -1018,7 +1056,7 @@ public class Main {
     }
 
     static void rexpr(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
         if(token.equals("tk_num") || token.equals("true") || token.equals("false")  || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
             simple_expr();
@@ -1028,7 +1066,7 @@ public class Main {
     }
 
     static void sig(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"<", "==", "<=", ">",">=","!=","&&","||",";",")",","};
         if(token.equals("tk_menor")){
             emparejar("tk_menor");
@@ -1061,7 +1099,7 @@ public class Main {
     }
 
     static void simple_expr(){
-        token = tokens.get(0).tipo;
+        token = getToken();
 
         String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
         if(token.equals("tk_num") || token.equals("true") || token.equals("false")  || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
@@ -1072,7 +1110,7 @@ public class Main {
     }
 
     static void t2(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"+","-","<","==","<=",">",">=","!=","||",";",")",",","&&"};
         if(token.equals("tk_mas")){
             emparejar("tk_mas");
@@ -1092,7 +1130,7 @@ public class Main {
     }
 
     static void term(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
         if( token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id") || token.equals("tk_incremento") ||
                 token.equals("tk_decremento") || token.equals("tk_par_izq") || token.equals("fid")){
@@ -1103,7 +1141,7 @@ public class Main {
     }
 
     static void fa(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"*","/","%","+","-","<","==","<=",">",">=","!=","||",";",")",",","&&"};
         if(token.equals("tk_mul")){
             emparejar("tk_mul");
@@ -1129,7 +1167,7 @@ public class Main {
     }
 
     static void factor(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"identificador de funcion", "(", "++", "identificador", "true", "false", "numero","--"};
         if(token.equals("fid") )
         {
@@ -1166,7 +1204,7 @@ public class Main {
     }
 
     static void s(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"*", "/","%","+","-","<","==","<=",">",">=","!=", "||", ";", ")" , ",", "&&","--","++"};
         if(token.equals("tk_mul") || token.equals("tk_div") || token.equals("tk_mod") || token.equals("tk_mas") || token.equals("tk_menos") || token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
                 || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or") || token.equals("tk_puntoycoma") ||
@@ -1182,7 +1220,7 @@ public class Main {
     }
 
     static void f2(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {")",","};
         if(token.equals("tk_par_der") ){
         }
@@ -1194,8 +1232,8 @@ public class Main {
         else errorSintaxis(esperados);
     }
     static void DATATYPE(){
-        token = tokens.get(0).tipo;
-        String[] esperados = {"num","bool"};
+        token = getToken();
+        String[] esperados = {"bool","num"};
         if(token.equals("num") ){
             emparejar("num");
         }
@@ -1206,7 +1244,7 @@ public class Main {
     }
 
     static void TK_BOOL(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"true","false"};
         if(token.equals("true" )){
             emparejar("true");
@@ -1218,7 +1256,7 @@ public class Main {
     }
 
     static void fn_decl_list_withVAR(){
-        token = tokens.get(0).tipo;
+        token = getToken();
         String[] esperados = {"var", "{","print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
                 "repeat", "for", "next", "break", "id", "--", "++"};
         if(token.equals("var")){

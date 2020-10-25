@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Generador
+public class Seconds
 {
 	static char ntermnl[],termnl[];
 	static int ntlen,tlen;
@@ -529,7 +529,7 @@ public class Generador
 				if(found==1)
 				{
 					if(str.contains("9")) 
-					{ //here epsilon will lead to next nonterminalÂ’s first set
+					{ //here epsilon will lead to next nonterminal’s first set
 						if(!(str.length()==1 && str.charAt(0)=='9'))
 						{ //when epsilon production is the only nonterminal production
 							if (!(k+1==grmr[i][j].length()))
@@ -579,7 +579,7 @@ public class Generador
 						{
 							for(m=0;m<ntlen;m++)
 							{
-								if(pro[l+1]==ntermnl[m]) //first of next non-terminal otherwise (else laterÂ…)
+								if(pro[l+1]==ntermnl[m]) //first of next non-terminal otherwise (else later…)
 								{
 									chr=new char[fst[m].length()];
 									chr=fst[m].toCharArray();
