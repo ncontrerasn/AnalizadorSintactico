@@ -907,78 +907,43 @@ public class Main {
             errorSintaxis(esperados);
     }
 
-
-
-
 static void nexpr_prima(){       
         token = tokens.get(0).tipo;
               String[] esperados = {"||","&&", ";",")",","};
-      if(token.equals("or"))
-        
-        {
+      if(token.equals("or")){
 	emparejar("or");
         lexpr_or();
-        
       }
      else if(token.equals("and")){
-      
         emparejar("and");
         lexpr_and();
-        
       }
 	else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma")){
-        
-        
       }
-     
       else errorSintaxis(esperados);
-    
-    
-    
-    
   }  
 
    static void lexpr_and(){      
        token = tokens.get(0).tipo;
         String[] esperados = {"!","numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
-      if(token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
-        
-        {
-        
+      if(token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
         nexpr();
         nexpr_primab();
-      
-        
       }
-     
-     
       else errorSintaxis(esperados);
-    
-    
-    
-    
-  }  
+  } 
+	
 static void nexpr_primab(){       
     token = tokens.get(0).tipo;
           String[] esperados = {"&&", ";" ,")", ","};
-      if(token.equals("and")  )
-        
-        {
+      if(token.equals("and") ){
         emparejar("and");
         lexpr_and();
-      
-        
       }
      else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma")){
         
-        
       }
-     
       else errorSintaxis(esperados);
-    
-    
-    
-    
   }  
   
   
@@ -990,332 +955,180 @@ static void nexpr_primab(){
      if(token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
       nexpr();
 	nexpr_primac();
-        
-        
-        
       }
-     
       else errorSintaxis(esperados);
-    
-    
-    
-    
   }  
-
-
+	
 	static void nexpr_primac(){     
         token = tokens.get(0).tipo;
             String[] esperados = {"||", ";" ,")", ","};
-      if(token.equals("or")  )
-        
-        {
-        
+      if(token.equals("or") ){
         emparejar("or");
 	      lexpr_or();
-      
-        
       }
      else if(token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma")){
-        
-        
       }
      
     else errorSintaxis(esperados);
-    
-    
-    
-    
   }  
   
    static void nexpr(){        
-  
-
         String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion","!"};
-      if(token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
-        
-        {
-        
-        rexpr();
-      
-        
+      if(token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
+        rexpr(); 
       }
      else if(token.equals("not")){
         emparejar("not");
         emparejar("tk_par_izq");
        lexpr();
        emparejar("tk_par_der");
-        
-        
-        
       }
-     
       else errorSintaxis(esperados);
-    
-    
-    
-    
-  }  
+  } 
+	
    static void rexpr(){    
- 
        token = tokens.get(0).tipo;
         String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
-      if(token.equals("tk_num") || token.equals("true") || token.equals("false")  || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
-        
-        {
-        
+      if(token.equals("tk_num") || token.equals("true") || token.equals("false")  || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
      simple_expr();
-      sig();
-        
+      sig(); 
       }
-     
       else errorSintaxis(esperados);
-    
-    
-    
-    
   }  
+	
     static void sig(){        
         token = tokens.get(0).tipo;
         String[] esperados = {"<", "==", "<=", ">",">=","!="};
-      if(token.equals("tk_menor") )
-        
-        {
+      if(token.equals("tk_menor")){
         emparejar("tk_menor");
         simple_expr();
-        
-       
       }
-      
       else if(token.equals("tk_igualdad")){
         emparejar("tk_igualdad");
         simple_expr();
-        
-        
-        
       }
        else if(token.equals("tk_menor_igual")){
         emparejar("tk_menor_igual");
         simple_expr();
-        
-        
-        
       }
       else if(token.equals("tk_mayor")){
         emparejar("tk_mayor");
-        simple_expr();
-        
-        
-        
+        simple_expr(); 
       }
       else if(token.equals("tk_mayor_igual")){
         emparejar("tk_mayor_igual");
         simple_expr();
-        
-        
-        
       }
       else if(token.equals("tk_diferente")){
         emparejar("tk_diferente");
         simple_expr();
-        
-        
-        
       }
-     
-      
-     
-     
-      else errorSintaxis(esperados);
-    
-    
-    
-    
+      else errorSintaxis(esperados);    
   }  
-  
   
   static void simple_expr(){        
       token = tokens.get(0).tipo;
 
         String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
-      if(token.equals("tk_num") || token.equals("true") || token.equals("false")  || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") )
-        
-        {
-        
+      if(token.equals("tk_num") || token.equals("true") || token.equals("false")  || token.equals("id")   || token.equals("tk_incremento") || token.equals("tk_decremento")  || token.equals("tk_par_izq") || token.equals("fid") ){
         term();
         t2();
-      
-        
       }
-     
       else errorSintaxis(esperados);
-    
-    
-    
-    
   }  
-  
   
   static void t2(){        
       token = tokens.get(0).tipo;
          String[] esperados = {"+","-","<","==","<=",">",">=","!=","||",";",")",",","&&"};
-      if(token.equals("tk_mas") )
-        
-        {
+      if(token.equals("tk_mas")){
         emparejar("tk_mas");
         term();
-        t2();
-       
+        t2(); 
       }
-      
       else if(token.equals("tk_menos")){
         emparejar("tk_menos");
         term();
-        t2();
-        
-        
-        
+        t2(); 
       }
-     
-      
-     
      else if(  token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
         || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or") 
-        || token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma") ||    token.equals("and")   
-            )
-        
-        {
-        
-        
+        || token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma") ||    token.equals("and")){
       }
       else errorSintaxis(esperados);
-    
-    
-    
-    
   }  
   
-  
   static void term(){        
-  
       token = tokens.get(0).tipo;
       String[] esperados = {"numero", "true", "false" ,"identificador", "++", "--","(", "identificador de funcion"};
       if( token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id") || token.equals("tk_incremento") ||
-                token.equals("tk_decremento") || token.equals("tk_par_izq") || token.equals("fid"))
-        
-        {
-        
+                token.equals("tk_decremento") || token.equals("tk_par_izq") || token.equals("fid")){
         factor();
         fa();
-      
-        
       }
-     
       else errorSintaxis(esperados);
-    
-    
-    
-    
-  }  
+  } 
+	
    static void fa(){       
        token = tokens.get(0).tipo;
        String[] esperados = {"*","/","%","+","-","<","==","<=",">",">=","!=","||",";",")",",","&&"};
-      if(token.equals("tk_mul") )
-        
-        {
+      if(token.equals("tk_mul")){
         emparejar("tk_mul");
         factor();
         fa();
-        
       }
-      
       else if(token.equals("tk_div")){
          emparejar("tk_div");
         factor();
         fa();
-        
-        
-        
-        
       }
-     
       else if(token.equals("tk_mod")){
          emparejar("tk_mod");
         factor();
         fa();
-        
       }
      
      else if( token.equals("tk_mas") || token.equals("tk_menos") || token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
         || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or") 
-        || token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma") ||    token.equals("and")   
-            )
-        
-        {
-        
-        
+        || token.equals("tk_puntoycoma") || token.equals("tk_par_der") || token.equals("tk_coma") ||    token.equals("and")){
       }
       else errorSintaxis(esperados);
-    
-    
-    
-    
   }  
   
    static void factor(){        
        token = tokens.get(0).tipo;
        String[] esperados = {"identificador de funcion", "(", "++", "identificador", "true", "false", "numero","--"};
       if(token.equals("fid") )
-        
         {
         emparejar("fid");
         emparejar("tk_par_izq");
         lexpr();
         f2();
         emparejar("tk_par_der");
-        
       }
-      
       else if(token.equals("tk_par_izq")){
         emparejar("tk_par_izq");
         lexpr();
         emparejar("tk_par_der");
-        
-        
-        
       }
-     
       else if(token.equals("tk_decremento")){
         emparejar("tk_decremento");
-       	 emparejar("id");
-                      
+       	 emparejar("id");           
       }
      else if(token.equals("tk_incremento")){
         emparejar("tk_incremento");
-       	 emparejar("id");
-                      
+       	 emparejar("id");              
       }
-     
       else if(token.equals("id")){
         emparejar("id");
-       	 s();
-                      
+       	 s();          
       }
-     
 	else if(token.equals("true") || token.equals("false")){
-        TK_BOOL();
-       	        
+        TK_BOOL();     
       }
-
-	
      else if(token.equals("tk_num")){
-        emparejar("tk_num");
-       	        
+        emparejar("tk_num");    
       }
      else errorSintaxis(esperados);
-    
-    
-    
-    
   }  
   
    static void s(){        
@@ -1323,85 +1136,52 @@ static void nexpr_primab(){
        String[] esperados = {"*", "/","%","+","-","<","==","<=",">",">=","!=", "||", ";", ")" , ",", "&&","--","++"};
       if(token.equals("tk_mul") || token.equals("tk_div") || token.equals("tk_mod") || token.equals("tk_mas") || token.equals("tk_menos") || token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
         || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or") || token.equals("tk_puntoycoma") || 
-          token.equals("token_par_der") || token.equals("tk_coma") || token.equals("and") )
-        
-        {
-        
-        
+          token.equals("token_par_der") || token.equals("tk_coma") || token.equals("and") ){
       }
-      
       else if(token.equals("tk_decremento")){
         emparejar("tk_decremento");
-        
-        
-        
       }
      else if(token.equals("tk_incremento")){
         emparejar("tk_incremento");
-        
-        
-        
       }
       else errorSintaxis(esperados);
-    
-    
-    
-    
   }  
   	
   static void f2(){        
       token = tokens.get(0).tipo;
             String[] esperados = {")",","};
       if(token.equals("tk_par_der") ){
-        
-        
       }
-      
       else if(token.equals("tk_coma")){
         emparejar("tk_coma");
         lexpr();
         f2();
-        
       }
       else errorSintaxis(esperados);
-      
-      
     }
-
 	static void DATATYPE(){        
       token = tokens.get(0).tipo;
             String[] esperados = {"num","bool"};
       if(token.equals("num") ){
         emparejar("num");
-        
       }
-      
       else if(token.equals("bool")){
         emparejar("bool");
-        
-        
       }
       else errorSintaxis(esperados);
-      
-      
     }
 
     static void TK_BOOL(){        
       token = tokens.get(0).tipo;
             String[] esperados = {"true","false"};
       if(token.equals("true" )){
-        emparejar("true");
-        
+        emparejar("true"); 
       }
-      
       else if(token.equals("false")){
         emparejar("false");
-        
-        
       }
       else errorSintaxis(esperados);
-      
-      
     }
+}
 	
 	
