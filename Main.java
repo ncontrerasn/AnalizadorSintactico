@@ -1141,7 +1141,7 @@ public class Main {
         String[] esperados = {"*", "/","%","+","-","<","==","<=",">",">=","!=", "||", ";", ")" , ",", "&&","--","++"};
         if(token.equals("tk_mul") || token.equals("tk_div") || token.equals("tk_mod") || token.equals("tk_mas") || token.equals("tk_menos") || token.equals("tk_menor") || token.equals("tk_igualdad") || token.equals("tk_menor_igual")
                 || token.equals("tk_mayor") || token.equals("tk_mayor_igual") || token.equals("diferente") || token.equals("or") || token.equals("tk_puntoycoma") ||
-                token.equals("token_par_der") || token.equals("tk_coma") || token.equals("and") ){
+                token.equals("tk_par_der") || token.equals("tk_coma") || token.equals("and") ){
         }
         else if(token.equals("tk_decremento")){
             emparejar("tk_decremento");
