@@ -62,7 +62,7 @@ public class Main {
         //for (int i = 0; i < tokens.size(); i++)
         //System.out.println(tokens.get(i).tipo);
         System.out.println("El analisis sintactico ha finalizado correctamente.");
-        System.out.println("Error sintactico: se encontro final de archivo; se esperaba â€˜endâ€™.");
+        System.out.println("Error sintactico: se encontro final de archivo; se esperaba ‘end’.");
 
     }
 
@@ -109,7 +109,7 @@ public class Main {
                     estado = estadoAFD(numeroActual);
                     xToprint = x;
                 }
-                if (numeroActual == 10)//nueva lÃ­nea
+                if (numeroActual == 10)//nueva línea
                 {
                     y++;
                     x = 0;
@@ -492,7 +492,7 @@ public class Main {
                         break;
                     case 999:
                         y = y - fixY(numeroActual);
-                        System.out.println(">>> Error lÃ©xico(lÃ­nea:" + y + ",posiciÃ³n:" + xToprint + ")");
+                        System.out.println(">>> Error léxico(línea:" + y + ",posición:" + xToprint + ")");
                         return;
                 }
             }
@@ -820,9 +820,7 @@ public class Main {
             emparejar("tk_par_izq");
             var_decl();
             emparejar("tk_par_der");
-            emparejar("var");
-            var_decl();
-            emparejar("tk_puntoycoma");
+            fn_decl_list_withVAR();
             stmt_block();
         }
         else
@@ -1003,7 +1001,7 @@ public class Main {
 
     static void sig(){
         token = tokens.get(0).tipo;
-        String[] esperados = {"<", "==", "<=", ">",">=","!="};
+        String[] esperados = {"<", "==", "<=", ">",">=","!=","&&","||",";",")",","};
         if(token.equals("tk_menor")){
             emparejar("tk_menor");
             simple_expr();
@@ -1027,6 +1025,9 @@ public class Main {
         else if(token.equals("tk_diferente")){
             emparejar("tk_diferente");
             simple_expr();
+        }
+        else if(token.equals("and")||token.equals("or")||token.equals("tk_puntoycoma")||token.equals("tk_par_der")||token.equals("tk_coma")){
+        	//lambda
         }
         else errorSintaxis(esperados);
     }
@@ -1184,6 +1185,25 @@ public class Main {
         }
         else if(token.equals("false")){
             emparejar("false");
+        }
+        else errorSintaxis(esperados);
+    }
+    
+    static void fn_decl_list_withVAR(){
+        token = tokens.get(0).tipo;
+        String[] esperados = {"var", "{","print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
+                "repeat", "for", "next", "break", "id", "--", "++"};
+        if(token.equals("var")){
+            emparejar("var");
+            var_decl();
+            emparejar("tk_puntoycoma");
+        }
+        else if(token.equals("tk_llave_izq")||token.equals("print") || token.equals("input") || token.equals("when") || token.equals("if") ||
+                token.equals("unless") || token.equals("while") || token.equals("return") || token.equals("until") ||
+                token.equals("loop") || token.equals("do") || token.equals("repeat") || token.equals("for") ||
+                token.equals("next") || token.equals("break") || token.equals("id") ||
+                token.equals("tk_decremento") || token.equals("tk_incremento")){
+            //lambda
         }
         else errorSintaxis(esperados);
     }
