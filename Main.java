@@ -667,6 +667,9 @@ public class Main {
                 case "tk_asignacion":
                     res = "==";
                     break;
+                default:
+                    res = s;
+                    break;
             }
             String[] esperados = {res};
             errorSintaxis(esperados);
