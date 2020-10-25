@@ -581,7 +581,94 @@ public class Main {
         {
             tokens.remove(0);
         }else {
-            String[] esperados = {s};
+             String res = "";
+            switch(s){
+                case "tk_par_der":
+                    res = ")";
+                    break;
+                case "tk_par_izq":
+                    res = "(";
+                    break;
+                case "tk_llave_izq":
+                    res = "{";
+                    break;
+                case "tk_llave_der":
+                    res = "}";
+                    break;
+                case "tk_mas":
+                    res = "+";
+                    break;
+                case "tk_menos":
+                    res = "-";
+                    break;
+                case "tk_menor":
+                    res = "<";
+                    break;
+                case "tk_mayor":
+                    res = ">";
+                    break;
+                case "tk_igualdad":
+                    res = "==";
+                    break;
+                case "tk_menor_igual":
+                    res = "<=";
+                    break;
+                case "tk_mayor_igual":
+                    res = ">=";
+                    break;
+                case "tk_diferente":
+                    res = "!=";
+                    break;
+                case "tk_puntoycoma":
+                    res = ";";
+                    break;
+                case "tk_coma":
+                    res = ",";
+                    break;
+                case "tk_decremento":
+                    res = "--";
+                    break;
+                case "tk_incremento":
+                    res = "++";
+                    break;
+                case "fid":
+                    res = "identificador de funcion";
+                    break;
+                case "id":
+                    res = "identificador";
+                    break;
+                case "tk_mul":
+                    res = "*";
+                    break;
+                case "tk_div":
+                    res = "/";
+                    break;
+                case "tk_mod":
+                    res = "%";
+                    break;
+                case "tk_sum_asig":
+                    res = "+=";
+                    break;
+                case "tk_res_asig":
+                    res = "-=";
+                    break;
+                case "tk_mul_asig":
+                    res = "*=";
+                    break;
+                case "tk_div_asig":
+                    res = "/=";
+                    break;
+                case "tk_mod_asig":
+                    res = "%=";
+                    break;
+                case "tk_dospuntos":
+                    res = ":";
+                    break;
+                case "tk_asignacion":
+                    res = "==";
+                    break;
+            }
+            String[] esperados = {res};
             errorSintaxis(esperados);
         }
     }
