@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class MySeconds {
+public class Main {
 
     public static ArrayList<Token> tokens = new ArrayList<>();
     public static String token;
@@ -569,7 +569,7 @@ public class MySeconds {
         String lexema = tokens.get(0).lexema;
         //System.out.println(lexema);
         //if(lexema == null){
-          //  lexema = tokens.get(0).tipo;
+        //  lexema = tokens.get(0).tipo;
         //}
         //System.out.println(lexema);
         //System.out.println(lexema.length() == 0);
@@ -585,10 +585,17 @@ public class MySeconds {
 
     static void prog() {
         token = tokens.get(0).tipo;
-        String[] esperados = {"function", "var"};
+        String[] esperados = {"function", "var", "end"};
         if (token.equals("function") || token.equals("var")) {
+            System.out.println("antes pfn");
             prog_fn();
+            System.out.println("despues pfn");
             main_prog();
+        }
+        else if (token.equals("end")) {
+            System.out.println("entramos al end");
+            emparejar("end");
+
         }
         else
             errorSintaxis(esperados);
@@ -596,7 +603,9 @@ public class MySeconds {
 
     static void prog_fn() {
         token = tokens.get(0).tipo;
-        String[] esperados = {"function", "var"};
+        String[] esperados = {"function", "var", "end"};
+        System.out.println(token);
+        System.out.println(tokens.get(1).tipo);
         if (token.equals("function")) {
             fn_decl_list();
             prog_fn();
@@ -604,23 +613,28 @@ public class MySeconds {
         else if (token.equals("var")) {
             //lambda
         }
+        else if (token.equals("end")) {
+            System.out.println("entramos al end");
+            emparejar("end");
+            if(tokens.size() == 0){
+                System.out.println("El analisis sintactico ha finalizado correctamente.");
+                System.exit(0);
+            }
+
+        }
         else
             errorSintaxis(esperados);
     }
 
     static void main_prog() {
         token = tokens.get(0).tipo;
-        String[] esperados = {"var", "end"};
+        String[] esperados = {"var"};
         if (token.equals("var")) {
             emparejar("var");
             var_decl();
             emparejar("tk_puntoycoma");
             main_stmt();
             emparejar("end");
-        }else if (token.equals("end")) {
-            System.out.println("entramos al end");
-            emparejar("end");
-           
         }
         else
             errorSintaxis(esperados);
@@ -1041,7 +1055,7 @@ public class MySeconds {
             simple_expr();
         }
         else if(token.equals("and")||token.equals("or")||token.equals("tk_puntoycoma")||token.equals("tk_par_der")||token.equals("tk_coma")){
-        	//lambda
+            //lambda
         }
         else errorSintaxis(esperados);
     }
@@ -1202,7 +1216,7 @@ public class MySeconds {
         }
         else errorSintaxis(esperados);
     }
-    
+
     static void fn_decl_list_withVAR(){
         token = tokens.get(0).tipo;
         String[] esperados = {"var", "{","print", "input", "when", "if", "unless", "while", "return", "until", "loop", "do",
