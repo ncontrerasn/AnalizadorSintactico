@@ -665,7 +665,7 @@ public class Main {
                     res = ":";
                     break;
                 case "tk_asignacion":
-                    res = "==";
+                    res = ":=";
                     break;
                 default:
                     res = s;
@@ -891,32 +891,32 @@ public class Main {
         String[] esperados = {":=", "+=", "-=", "*=", "/=", "%=", "++", "--"};
         if (token.equals("tk_asignacion")) {
             emparejar("tk_asignacion");
-            lexpr();
+            lexpr2();
             emparejar("tk_puntoycoma");
         }
         else if (token.equals("tk_sum_asig")) {
             emparejar("tk_sum_asig");
-            lexpr();
+            lexpr2();
             emparejar("tk_puntoycoma");
         }
         else if (token.equals("tk_res_asig")) {
             emparejar("tk_res_asig");
-            lexpr();
+            lexpr2();
             emparejar("tk_puntoycoma");
         }
         else if (token.equals("tk_mul_asig")) {
             emparejar("tk_mul_asig");
-            lexpr();
+            lexpr2();
             emparejar("tk_puntoycoma");
         }
         else if (token.equals("tk_div_asig")) {
             emparejar("tk_div_asig");
-            lexpr();
+            lexpr2();
             emparejar("tk_puntoycoma");
         }
         else if (token.equals("tk_mod_asig")) {
             emparejar("tk_mod_asig");
-            lexpr();
+            lexpr2();
             emparejar("tk_puntoycoma");
         }
         else if (token.equals("tk_incremento")) {
@@ -1124,31 +1124,39 @@ public class Main {
     static void sig(){
         token = getToken();
         String[] esperados = {"<", "==", "<=", ">",">=","!=","and","or",";",")",","};
+        System.out.println(token);
         if(token.equals("tk_menor")){
+        	System.out.println(token);
             emparejar("tk_menor");
             simple_expr();
         }
         else if(token.equals("tk_igualdad")){
+        	System.out.println(token);
             emparejar("tk_igualdad");
             simple_expr();
         }
         else if(token.equals("tk_menor_igual")){
+        	System.out.println(token);
             emparejar("tk_menor_igual");
             simple_expr();
         }
         else if(token.equals("tk_mayor")){
+        	System.out.println(token);
             emparejar("tk_mayor");
             simple_expr();
         }
         else if(token.equals("tk_mayor_igual")){
+        	System.out.println(token);
             emparejar("tk_mayor_igual");
             simple_expr();
         }
         else if(token.equals("tk_diferente")){
+        	System.out.println(token);
             emparejar("tk_diferente");
             simple_expr();
         }
         else if(token.equals("and")||token.equals("or")||token.equals("tk_puntoycoma")||token.equals("tk_par_der")||token.equals("tk_coma")){
+        	System.out.println(token);
             //lambda
         }
         else errorSintaxis(esperados);
@@ -1326,6 +1334,35 @@ public class Main {
                 token.equals("next") || token.equals("break") || token.equals("id") ||
                 token.equals("tk_decremento") || token.equals("tk_incremento")){
             //lambda
+        }
+        else errorSintaxis(esperados);
+    }
+    
+    static void lexpr2(){
+        token = getToken();
+        String[] esperados = {"not", "numero", "true", "false", "identificador", "++", "--", "(", "identificador de funcion"};
+        if (token.equals("not") || token.equals("tk_num") || token.equals("true") || token.equals("false") || token.equals("id") ||
+                token.equals("tk_incremento") || token.equals("tk_decremento") || token.equals("tk_par_izq") ||
+                token.equals("fid")) {
+            nexpr();
+            nexpr_prima_l2();
+        }
+        else
+            errorSintaxis(esperados);
+    }
+    
+    static void nexpr_prima_l2(){
+        token = getToken();
+        String[] esperados = {"or","and", ";"};
+        if(token.equals("or")){
+            emparejar("or");
+            lexpr_or();
+        }
+        else if(token.equals("and")){
+            emparejar("and");
+            lexpr_and();
+        }
+        else if(token.equals("tk_puntoycoma")){
         }
         else errorSintaxis(esperados);
     }
